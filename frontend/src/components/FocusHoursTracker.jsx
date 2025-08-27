@@ -5,7 +5,6 @@ import { Clock, TrendingUp, Zap } from 'lucide-react';
 
 const FocusHoursTracker = () => {
   const [focusData, setFocusData] = useState({});
-  const [selectedCell, setSelectedCell] = useState(null);
 
   const hourOptions = [0, 2, 4, 6, 8, 10];
   const days = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -37,27 +36,18 @@ const FocusHoursTracker = () => {
       ...prev,
       [day]: hours
     }));
-    setSelectedCell({ day, hours });
-    setTimeout(() => setSelectedCell(null), 200);
   };
 
   const getColorForHours = (hours) => {
     const colors = {
-      0: 'bg-gray-300',
-      2: 'bg-yellow-400',
-      4: 'bg-orange-500',
-      6: 'bg-red-500',
-      8: 'bg-purple-600',
-      10: 'bg-blue-600'
+      0: 'bg-gray-300 hover:bg-gray-400',
+      2: 'bg-yellow-400 hover:bg-yellow-500',
+      4: 'bg-orange-500 hover:bg-orange-600',
+      6: 'bg-red-500 hover:bg-red-600',
+      8: 'bg-purple-600 hover:bg-purple-700',
+      10: 'bg-blue-600 hover:bg-blue-700'
     };
-    return colors[hours] || 'bg-gray-300';
-  };
-
-  const getIntensityClass = (hours) => {
-    if (hours >= 8) return 'shadow-lg scale-110';
-    if (hours >= 6) return 'shadow-md scale-105';
-    if (hours >= 4) return 'shadow-sm';
-    return '';
+    return colors[hours] || 'bg-gray-300 hover:bg-gray-400';
   };
 
   const getTotalHours = () => {
@@ -70,12 +60,11 @@ const FocusHoursTracker = () => {
   };
 
   const getStreakInfo = () => {
-    const sortedDays = days.sort((a, b) => a - b);
     let currentStreak = 0;
     let maxStreak = 0;
     let tempStreak = 0;
 
-    sortedDays.forEach(day => {
+    days.forEach(day => {
       if (focusData[day] >= 4) { // Streak if >= 4 hours
         tempStreak++;
         maxStreak = Math.max(maxStreak, tempStreak);
