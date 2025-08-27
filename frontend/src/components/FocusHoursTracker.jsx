@@ -325,6 +325,5 @@ const FocusHoursTracker = () => {
     </div>
   );
 };
-};
 
 export default FocusHoursTracker;
