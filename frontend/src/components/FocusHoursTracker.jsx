@@ -224,49 +224,76 @@ const FocusHoursTracker = () => {
               ))}
             </div>
 
-              {/* Connection lines - SVG overlay */}
-              <svg 
-                className="absolute top-0 left-0 w-full h-full pointer-events-none" 
-                style={{ zIndex: 1 }}
-              >
-                {days.slice(0, -1).map(day => {
-                  const currentHours = focusData[day];
-                  const nextHours = focusData[day + 1];
+              {/* Connection lines - Simple line graph */}
+              <div className="mt-6 relative">
+                <svg 
+                  className="w-full h-32" 
+                  viewBox={`0 0 ${days.length * 30} 100`}
+                  style={{ overflow: 'visible' }}
+                >
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#06b6d4" />
+                    </linearGradient>
+                  </defs>
                   
-                  if (currentHours === undefined || nextHours === undefined) return null;
-                  
-                  // Calculate positions
-                  const cellWidth = 100 / 31; // percentage width of each cell
-                  const currentX = (day + 0.5) * cellWidth;
-                  const nextX = (day + 1.5) * cellWidth;
-                  
-                  // Y position based on hour value (inverted because higher hours are at top)
-                  const getYPosition = (hours) => {
-                    const hourIndex = hourOptions.indexOf(hours);
-                    return ((5 - hourIndex) + 0.5) * (100 / 6); // 6 = number of hour options + 1 for header
-                  };
-                  
-                  const currentY = getYPosition(currentHours) + 8; // +8 for header offset
-                  const nextY = getYPosition(nextHours) + 8;
-                  
-                  const strokeColor = currentHours > nextHours ? '#ef4444' : 
-                                   currentHours < nextHours ? '#10b981' : '#6b7280';
-                  
-                  return (
-                    <line
-                      key={`line-${day}`}
-                      x1={`${currentX}%`}
-                      y1={`${currentY}%`}
-                      x2={`${nextX}%`}
-                      y2={`${nextY}%`}
-                      stroke={strokeColor}
-                      strokeWidth="2"
-                      strokeOpacity="0.7"
-                      className="transition-all duration-300"
-                    />
-                  );
-                })}
-              </svg>
+                  {/* Connection lines */}
+                  {days.slice(0, -1).map(day => {
+                    const currentHours = focusData[day] || 0;
+                    const nextHours = focusData[day + 1] || 0;
+                    
+                    const currentX = (day - 1) * 30 + 15;
+                    const nextX = day * 30 + 15;
+                    
+                    // Y position (inverted - 0 is at top, 100 at bottom)
+                    const currentY = 90 - (currentHours / 10) * 80;
+                    const nextY = 90 - (nextHours / 10) * 80;
+                    
+                    const strokeColor = currentHours > nextHours ? '#ef4444' : 
+                                     currentHours < nextHours ? '#10b981' : '#6b7280';
+                    
+                    return (
+                      <g key={`line-${day}`}>
+                        <line
+                          x1={currentX}
+                          y1={currentY}
+                          x2={nextX}
+                          y2={nextY}
+                          stroke={strokeColor}
+                          strokeWidth="2"
+                          strokeOpacity="0.8"
+                        />
+                        {/* Data points */}
+                        <circle
+                          cx={currentX}
+                          cy={currentY}
+                          r="4"
+                          fill="url(#lineGradient)"
+                          stroke="white"
+                          strokeWidth="2"
+                        />
+                        {day === 29 && (
+                          <circle
+                            cx={nextX}
+                            cy={nextY}
+                            r="4"
+                            fill="url(#lineGradient)"
+                            stroke="white"
+                            strokeWidth="2"
+                          />
+                        )}
+                      </g>
+                    );
+                  })}
+                </svg>
+                
+                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                  <span>Day 1</span>
+                  <span>Day 15</span>
+                  <span>Day 30</span>
+                </div>
+              </div>
             </div>
           </div>
 
