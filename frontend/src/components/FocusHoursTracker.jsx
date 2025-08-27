@@ -160,150 +160,171 @@ const FocusHoursTracker = () => {
             <CardTitle>30-Day Focus Hours Grid</CardTitle>
           </div>
           <p className="text-sm text-muted-foreground">
-            Click on dots to set focus hours for each day. Lines connect daily progress.
+            Click on dots to set focus hours for each day. Graph shows daily trends.
           </p>
         </CardHeader>
-        <CardContent className="p-6">
+        <CardContent className="p-0">
           <div className="overflow-x-auto">
-            <div className="min-w-[1000px] relative">
-              {/* Headers */}
-              <div className="flex mb-4">
-                <div className="w-16 flex items-center justify-center text-sm font-medium text-muted-foreground"></div>
-                <div className="flex-1 grid grid-cols-30 gap-2">
+            {/* Tabular Grid */}
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-muted/50">
+                  <th className="sticky left-0 z-10 bg-muted/50 p-3 text-center font-medium border-r">
+                    Hours
+                  </th>
                   {days.map(day => (
-                    <div key={day} className="h-8 flex items-center justify-center text-xs font-medium text-muted-foreground">
-                      D{day}
-                    </div>
+                    <th key={day} className="p-2 text-center font-medium text-xs min-w-[40px]">
+                      Day {day}
+                    </th>
                   ))}
-                </div>
-              </div>
-
-              {/* Hour rows */}
-              {hourOptions.slice().reverse().map(hours => (
-                <div key={hours} className="flex mb-2 items-center">
-                  {/* Hour label */}
-                  <div className="w-16 h-12 flex items-center justify-center text-sm font-medium text-muted-foreground bg-muted/30 rounded mr-2">
-                    {hours}h
-                  </div>
-                  
-                  {/* Day cells for this hour */}
-                  <div className="flex-1 grid grid-cols-30 gap-2">
-                    {days.map(day => {
-                      const isActive = focusData[day] === hours;
-                      const isSelected = selectedCell?.day === day && selectedCell?.hours === hours;
-                      
-                      return (
-                        <div key={`${day}-${hours}`} className="h-12 flex items-center justify-center">
-                          <button
-                            onClick={() => handleCellClick(day, hours)}
-                            className={`
-                              w-8 h-8 rounded-full border-2 transition-all duration-200 hover:scale-110 hover:shadow-md
-                              ${isActive 
-                                ? `${getColorForHours(hours)} border-white shadow-md ${getIntensityClass(hours)}` 
-                                : 'bg-gray-200 border-gray-300 hover:bg-gray-300'
-                              }
-                              ${isSelected ? 'ring-2 ring-blue-500 ring-offset-1' : ''}
-                            `}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-
-              {/* Connection lines - Simple line graph */}
-              <div className="mt-6 relative">
-                <svg 
-                  className="w-full h-32" 
-                  viewBox={`0 0 ${days.length * 30} 100`}
-                  style={{ overflow: 'visible' }}
-                >
-                  <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Connection lines */}
-                  {days.slice(0, -1).map(day => {
-                    const currentHours = focusData[day] || 0;
-                    const nextHours = focusData[day + 1] || 0;
-                    
-                    const currentX = (day - 1) * 30 + 15;
-                    const nextX = day * 30 + 15;
-                    
-                    // Y position (inverted - 0 is at top, 100 at bottom)
-                    const currentY = 90 - (currentHours / 10) * 80;
-                    const nextY = 90 - (nextHours / 10) * 80;
-                    
-                    const strokeColor = currentHours > nextHours ? '#ef4444' : 
-                                     currentHours < nextHours ? '#10b981' : '#6b7280';
-                    
-                    return (
-                      <g key={`line-${day}`}>
-                        <line
-                          x1={currentX}
-                          y1={currentY}
-                          x2={nextX}
-                          y2={nextY}
-                          stroke={strokeColor}
-                          strokeWidth="2"
-                          strokeOpacity="0.8"
+                </tr>
+              </thead>
+              <tbody>
+                {hourOptions.slice().reverse().map(hours => (
+                  <tr key={hours} className="border-b hover:bg-muted/20 transition-colors">
+                    <td className="sticky left-0 z-10 bg-background p-3 font-medium text-center border-r">
+                      {hours}hrs
+                    </td>
+                    {days.map(day => (
+                      <td key={`${hours}-${day}`} className="p-2 text-center">
+                        <button
+                          onClick={() => handleCellClick(day, hours)}
+                          className={`
+                            w-6 h-6 rounded-full border-2 border-white transition-all duration-200 
+                            hover:scale-125 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500
+                            ${focusData[day] === hours 
+                              ? `${getColorForHours(hours)} shadow-md` 
+                              : 'bg-gray-200 hover:bg-gray-300'
+                            }
+                          `}
+                          title={`Set ${hours} hours for Day ${day}`}
                         />
-                        {/* Data points */}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Trend Line Graph */}
+          <div className="p-6 border-t">
+            <h4 className="font-medium mb-4 flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              Daily Progress Trend
+            </h4>
+            <div className="relative">
+              <svg 
+                className="w-full h-32 border rounded-lg bg-muted/20" 
+                viewBox="0 0 900 120"
+              >
+                <defs>
+                  <linearGradient id="trendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="#06b6d4" />
+                  </linearGradient>
+                </defs>
+                
+                {/* Grid lines */}
+                {[20, 40, 60, 80, 100].map(y => (
+                  <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#e5e7eb" strokeWidth="1" />
+                ))}
+                
+                {/* Trend line and dots */}
+                {days.slice(0, -1).map(day => {
+                  const currentHours = focusData[day] || 0;
+                  const nextHours = focusData[day + 1] || 0;
+                  
+                  const currentX = (day - 1) * 30 + 15;
+                  const nextX = day * 30 + 15;
+                  
+                  // Y position (inverted - 0 is at bottom, 120 at top)
+                  const currentY = 100 - (currentHours / 10) * 80;
+                  const nextY = 100 - (nextHours / 10) * 80;
+                  
+                  const strokeColor = currentHours > nextHours ? '#ef4444' : 
+                                   currentHours < nextHours ? '#10b981' : '#6b7280';
+                  
+                  return (
+                    <g key={`trend-${day}`}>
+                      {/* Connection line */}
+                      <line
+                        x1={currentX}
+                        y1={currentY}
+                        x2={nextX}
+                        y2={nextY}
+                        stroke={strokeColor}
+                        strokeWidth="2"
+                        strokeOpacity="0.8"
+                      />
+                      {/* Data point */}
+                      <circle
+                        cx={currentX}
+                        cy={currentY}
+                        r="3"
+                        fill="url(#trendGradient)"
+                        stroke="white"
+                        strokeWidth="2"
+                      />
+                      {/* Last point */}
+                      {day === 29 && (
                         <circle
-                          cx={currentX}
-                          cy={currentY}
-                          r="4"
-                          fill="url(#lineGradient)"
+                          cx={nextX}
+                          cy={nextY}
+                          r="3"
+                          fill="url(#trendGradient)"
                           stroke="white"
                           strokeWidth="2"
                         />
-                        {day === 29 && (
-                          <circle
-                            cx={nextX}
-                            cy={nextY}
-                            r="4"
-                            fill="url(#lineGradient)"
-                            stroke="white"
-                            strokeWidth="2"
-                          />
-                        )}
-                      </g>
-                    );
-                  })}
-                </svg>
-                
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                  <span>Day 1</span>
-                  <span>Day 15</span>
-                  <span>Day 30</span>
-                </div>
+                      )}
+                    </g>
+                  );
+                })}
+              </svg>
+              
+              {/* X-axis labels */}
+              <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <span>Day 1</span>
+                <span>Day 10</span>
+                <span>Day 20</span>
+                <span>Day 30</span>
+              </div>
+              
+              {/* Y-axis labels */}
+              <div className="absolute left-0 top-0 h-32 flex flex-col justify-between text-xs text-muted-foreground -ml-8">
+                <span>10h</span>
+                <span>8h</span>
+                <span>6h</span>
+                <span>4h</span>
+                <span>2h</span>
+                <span>0h</span>
               </div>
             </div>
           </div>
 
           {/* Legend */}
-          <div className="mt-6 p-4 bg-muted/30 rounded-lg">
-            <p className="text-sm font-medium mb-2">Focus Hours Legend:</p>
-            <div className="flex flex-wrap gap-4">
-              {hourOptions.map(hours => (
-                <div key={hours} className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded-full ${getColorForHours(hours)}`}></div>
-                  <span className="text-sm">{hours}h</span>
-                </div>
-              ))}
+          <div className="p-6 pt-0">
+            <div className="p-4 bg-muted/30 rounded-lg">
+              <p className="text-sm font-medium mb-3">Focus Hours Legend:</p>
+              <div className="flex flex-wrap gap-4 mb-3">
+                {hourOptions.map(hours => (
+                  <div key={hours} className="flex items-center gap-2">
+                    <div className={`w-4 h-4 rounded-full border border-white ${getColorForHours(hours).split(' ')[0]}`}></div>
+                    <span className="text-sm">{hours}h</span>
+                  </div>
+                ))}
+              </div>
+              <div className="text-xs text-muted-foreground">
+                <p><strong>Trend Lines:</strong> 🟢 Green (increasing) • 🔴 Red (decreasing) • ⚫ Gray (stable)</p>
+                <p><strong>Usage:</strong> Click colored dots in the grid to set daily focus hours</p>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Lines: 🟢 Green (increase) • 🔴 Red (decrease) • ⚫ Gray (same)
-            </p>
           </div>
         </CardContent>
       </Card>
     </div>
   );
+};
 };
 
 export default FocusHoursTracker;
