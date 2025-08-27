@@ -222,7 +222,6 @@ const FocusHoursTracker = () => {
                   </div>
                 </div>
               ))}
-            </div>
 
               {/* Connection lines - Simple line graph */}
               <div className="mt-6 relative">
