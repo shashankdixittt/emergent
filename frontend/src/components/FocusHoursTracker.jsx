@@ -176,35 +176,39 @@ const FocusHoursTracker = () => {
         </CardHeader>
         <CardContent className="p-6">
           <div className="overflow-x-auto">
-            <div className="min-w-[800px] relative">
-              {/* Grid container */}
-              <div className="grid grid-cols-31 gap-1">
-                {/* Top header - empty cell + days */}
-                <div className="h-8"></div>
-                {days.map(day => (
-                  <div key={day} className="h-8 flex items-center justify-center text-xs font-medium text-muted-foreground">
-                    D{day}
-                  </div>
-                ))}
-
-                {/* Hour rows */}
-                {hourOptions.slice().reverse().map(hours => (
-                  <React.Fragment key={hours}>
-                    {/* Hour label */}
-                    <div className="h-12 flex items-center justify-center text-sm font-medium text-muted-foreground bg-muted/30 rounded">
-                      {hours}h
+            <div className="min-w-[1000px] relative">
+              {/* Headers */}
+              <div className="flex mb-4">
+                <div className="w-16 flex items-center justify-center text-sm font-medium text-muted-foreground"></div>
+                <div className="flex-1 grid grid-cols-30 gap-2">
+                  {days.map(day => (
+                    <div key={day} className="h-8 flex items-center justify-center text-xs font-medium text-muted-foreground">
+                      D{day}
                     </div>
-                    {/* Day cells for this hour */}
+                  ))}
+                </div>
+              </div>
+
+              {/* Hour rows */}
+              {hourOptions.slice().reverse().map(hours => (
+                <div key={hours} className="flex mb-2 items-center">
+                  {/* Hour label */}
+                  <div className="w-16 h-12 flex items-center justify-center text-sm font-medium text-muted-foreground bg-muted/30 rounded mr-2">
+                    {hours}h
+                  </div>
+                  
+                  {/* Day cells for this hour */}
+                  <div className="flex-1 grid grid-cols-30 gap-2">
                     {days.map(day => {
                       const isActive = focusData[day] === hours;
                       const isSelected = selectedCell?.day === day && selectedCell?.hours === hours;
                       
                       return (
-                        <div key={`${day}-${hours}`} className="h-12 flex items-center justify-center relative">
+                        <div key={`${day}-${hours}`} className="h-12 flex items-center justify-center">
                           <button
                             onClick={() => handleCellClick(day, hours)}
                             className={`
-                              w-6 h-6 rounded-full border-2 transition-all duration-200 hover:scale-110
+                              w-8 h-8 rounded-full border-2 transition-all duration-200 hover:scale-110 hover:shadow-md
                               ${isActive 
                                 ? `${getColorForHours(hours)} border-white shadow-md ${getIntensityClass(hours)}` 
                                 : 'bg-gray-200 border-gray-300 hover:bg-gray-300'
@@ -215,9 +219,10 @@ const FocusHoursTracker = () => {
                         </div>
                       );
                     })}
-                  </React.Fragment>
-                ))}
-              </div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
               {/* Connection lines - SVG overlay */}
               <svg 
