@@ -118,11 +118,12 @@ A comprehensive habit and focus hours tracking application with local storage fu
   _id: ObjectId,
   sessionId: String, // For anonymous users
   day: Number (1-30),
-  habit1: Boolean,
-  habit2: Boolean,
-  habit3: Boolean,
-  habit4: Boolean,
-  habit5: Boolean,
+  habit1: Boolean, // No Social Media
+  habit2: Boolean, // No Songs
+  habit3: Boolean, // No Maggie/Chai/Coffee
+  habit4: Boolean, // 1min Self Video Recording
+  habit5: Boolean, // 45min Book Reading
+  habit6: Boolean, // Meditation
   createdAt: Date,
   updatedAt: Date
 }
