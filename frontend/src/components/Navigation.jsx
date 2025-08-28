@@ -1,22 +1,32 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Target, Clock } from 'lucide-react';
+import { Target, Clock, BarChart3, Home, Flag } from 'lucide-react';
+import Dashboard from './Dashboard';
 import HabitTracker from './HabitTracker';
 import FocusHoursTracker from './FocusHoursTracker';
+import Analytics from './Analytics';
+import GoalSetting from './GoalSetting';
 
 const Navigation = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 p-4">
       <div className="max-w-7xl mx-auto">
-        <Tabs defaultValue="habits" className="w-full">
+        <Tabs defaultValue="dashboard" className="w-full">
           <div className="flex justify-center mb-8">
-            <TabsList className="grid w-[400px] grid-cols-2 bg-white shadow-sm border">
+            <TabsList className="grid w-[600px] grid-cols-5 bg-white shadow-sm border">
               <TabsTrigger 
-                value="habits" 
+                value="dashboard" 
                 className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
               >
+                <Home className="h-4 w-4" />
+                Dashboard
+              </TabsTrigger>
+              <TabsTrigger 
+                value="habits" 
+                className="flex items-center gap-2 data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
                 <Target className="h-4 w-4" />
-                Protocol Tracker
+                Protocols
               </TabsTrigger>
               <TabsTrigger 
                 value="focus" 
@@ -25,8 +35,26 @@ const Navigation = () => {
                 <Clock className="h-4 w-4" />
                 Focus Hours
               </TabsTrigger>
+              <TabsTrigger 
+                value="analytics" 
+                className="flex items-center gap-2 data-[state=active]:bg-orange-600 data-[state=active]:text-white"
+              >
+                <BarChart3 className="h-4 w-4" />
+                Analytics
+              </TabsTrigger>
+              <TabsTrigger 
+                value="goals" 
+                className="flex items-center gap-2 data-[state=active]:bg-pink-600 data-[state=active]:text-white"
+              >
+                <Flag className="h-4 w-4" />
+                Goals
+              </TabsTrigger>
             </TabsList>
           </div>
+
+          <TabsContent value="dashboard" className="space-y-4">
+            <Dashboard />
+          </TabsContent>
 
           <TabsContent value="habits" className="space-y-4">
             <HabitTracker />
@@ -34,6 +62,14 @@ const Navigation = () => {
 
           <TabsContent value="focus" className="space-y-4">
             <FocusHoursTracker />
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <Analytics />
+          </TabsContent>
+
+          <TabsContent value="goals" className="space-y-4">
+            <GoalSetting />
           </TabsContent>
         </Tabs>
       </div>
