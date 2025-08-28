@@ -7,8 +7,15 @@ A comprehensive habit and focus hours tracking application with local storage fu
 
 ### 1. Protocol Tracker (Habit Tracker)
 - **Status**: Fully functional with local storage
-- **Features**: 5 habits × 30 days checkbox grid, real-time statistics, progress tracking
-- **Data Structure**: `{ day: { habit1: boolean, habit2: boolean, ..., habit5: boolean } }`
+- **Features**: 6 habits × 30 days checkbox grid, real-time statistics, progress tracking
+- **Habit Names**: 
+  1. No Social Media
+  2. No Songs  
+  3. No Maggie/Chai/Coffee
+  4. 1min Self Video Recording
+  5. 45min Book Reading
+  6. Meditation
+- **Data Structure**: `{ day: { habit1: boolean, habit2: boolean, ..., habit6: boolean } }`
 
 ### 2. Focus Hours Tracker  
 - **Status**: Fully functional with interactive grid and line graph
