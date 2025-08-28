@@ -54,7 +54,7 @@ A comprehensive habit and focus hours tracking application with local storage fu
 ```json
 {
   "day": 1,
-  "habitData": { "habit1": true, "habit2": false, "habit3": true, "habit4": false, "habit5": true }
+  "habitData": { "habit1": true, "habit2": false, "habit3": true, "habit4": false, "habit5": true, "habit6": false }
 }
 ```
 
