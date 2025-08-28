@@ -40,8 +40,8 @@ A comprehensive habit and focus hours tracking application with local storage fu
 ```json
 {
   "data": {
-    "1": { "habit1": true, "habit2": false, "habit3": true, "habit4": false, "habit5": true },
-    "2": { "habit1": false, "habit2": true, "habit3": false, "habit4": true, "habit5": false }
+    "1": { "habit1": true, "habit2": false, "habit3": true, "habit4": false, "habit5": true, "habit6": false },
+    "2": { "habit1": false, "habit2": true, "habit3": false, "habit4": true, "habit5": false, "habit6": true }
     // ... up to day 30
   },
   "lastUpdated": "2025-01-27T10:00:00Z"
