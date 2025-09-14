@@ -4,12 +4,16 @@ export const mockHabitData = () => {
   const data = {};
   for (let day = 1; day <= 100; day++) {
     data[day] = {
-      habit1: Math.random() > 0.3, // 70% completion rate - No Social Media
+      habit1: Math.random() > 0.3, // 70% completion rate - No Insta/FB
       habit2: Math.random() > 0.4, // 60% completion rate - No Songs
-      habit3: Math.random() > 0.5, // 50% completion rate - No Maggie/Chai/Coffee
-      habit4: Math.random() > 0.6, // 40% completion rate - 1min Self Video Recording
-      habit5: Math.random() > 0.7, // 30% completion rate - 45min Book Reading
-      habit6: Math.random() > 0.4, // 60% completion rate - Meditation
+      habit3: Math.random() > 0.5, // 50% completion rate - No Maggie
+      habit4: Math.random() > 0.6, // 40% completion rate - Mindful Eating
+      habit5: Math.random() > 0.7, // 30% completion rate - No PMO
+      habit6: Math.random() > 0.4, // 60% completion rate - WakeUp @8pm
+      habit7: Math.random() > 0.7, // 30% completion rate - 45min Book Reading
+      habit8: Math.random() > 0.4, // 60% completion rate - Meditation
+      habit9: Math.random() > 0.5, // 50% completion rate - Revise Notes
+      habit10: Math.random() > 0.6, // 40% completion rate - 3hrs of Tech
     };
   }
   return data;
