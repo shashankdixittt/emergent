@@ -11,9 +11,15 @@ const FocusHoursTracker = () => {
 
   // Initialize focus data
   useEffect(() => {
-    // Always start with empty data - force clear for fresh start
-    localStorage.removeItem('focusHoursData');
-    setFocusData({});
+    const savedData = localStorage.getItem('focusHoursData');
+    if (savedData) {
+      try {
+        setFocusData(JSON.parse(savedData));
+      } catch (error) {
+        console.error('Error loading focus data:', error);
+        setFocusData({});
+      }
+    }
   }, []);
 
   // Save to localStorage whenever data changes
