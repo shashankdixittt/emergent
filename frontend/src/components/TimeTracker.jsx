@@ -31,11 +31,18 @@ const TimeTracker = () => {
   useEffect(() => {
     const savedEntries = localStorage.getItem('timeEntries');
     if (savedEntries) {
-      setTimeEntries(JSON.parse(savedEntries).map(entry => ({
-        ...entry,
-        startTime: new Date(entry.startTime),
-        endTime: new Date(entry.endTime)
-      })));
+      try {
+        setTimeEntries(JSON.parse(savedEntries).map(entry => ({
+          ...entry,
+          startTime: new Date(entry.startTime),
+          endTime: new Date(entry.endTime)
+        })));
+      } catch (error) {
+        console.error('Error loading time entries:', error);
+        // Clear corrupted data
+        localStorage.removeItem('timeEntries');
+        setTimeEntries([]);
+      }
     }
   }, []);
 
