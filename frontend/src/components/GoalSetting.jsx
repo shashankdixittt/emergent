@@ -96,9 +96,69 @@ const GoalSetting = () => {
   }, [goals]);
 
   useEffect(() => {
-    // Force clear habit data for fresh start
-    localStorage.removeItem('habitTrackerData');
-    setHabitData({});
+    const savedGoals = localStorage.getItem('personalGoals');
+    if (savedGoals) {
+      try {
+        setGoals(JSON.parse(savedGoals));
+      } catch (error) {
+        console.error('Error loading goals:', error);
+        setGoals([]);
+      }
+    } else {
+      // Initialize with some example goals for 100-day challenge
+      const defaultGoals = [
+        {
+          id: Date.now() + 1,
+          title: 'Complete 80% of habits in 100-day challenge',
+          description: 'Maintain consistency in daily habits to build strong routines over 100 days',
+          category: 'habits',
+          target: '80%',
+          deadline: '2025-05-08', // ~100 days from now
+          priority: 'high',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 2,
+          title: 'Achieve 750 total focus hours',
+          description: 'Increase productivity through focused work sessions over 100 days',
+          category: 'productivity',
+          target: '750 hours',
+          deadline: '2025-05-08',
+          priority: 'medium',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 3,
+          title: 'Reach 50-day milestone',
+          description: 'Complete half of the 100-day challenge successfully',
+          category: 'personal',
+          target: '50 days',
+          deadline: '2025-03-18', // ~50 days from now
+          priority: 'high',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 4,
+          title: 'Maintain 14-day streak',
+          description: 'Build momentum with a 2-week consistent habit streak',
+          category: 'habits',
+          target: '14 days',
+          deadline: '2025-02-15', // ~2 weeks from now
+          priority: 'medium',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        }
+      ];
+      setGoals(defaultGoals);
+      localStorage.setItem('personalGoals', JSON.stringify(defaultGoals));
+    }
   }, []);
 
   const handleCreateGoal = () => {
