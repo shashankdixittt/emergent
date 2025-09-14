@@ -12,7 +12,8 @@ import {
   CheckCircle2, 
   BarChart3,
   Star,
-  Fire
+  Fire,
+  Trophy
 } from 'lucide-react';
 
 const Dashboard = () => {
