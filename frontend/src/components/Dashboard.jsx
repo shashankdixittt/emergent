@@ -243,7 +243,7 @@ const Dashboard = () => {
                 <p className="text-3xl font-bold">{currentStreak}</p>
                 <p className="text-xs text-muted-foreground">days</p>
               </div>
-              <Fire className="h-10 w-10 text-green-600" />
+              <Flame className="h-10 w-10 text-green-600" />
             </div>
           </CardContent>
         </Card>
