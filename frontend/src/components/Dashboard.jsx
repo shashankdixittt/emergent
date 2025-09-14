@@ -83,13 +83,16 @@ const Dashboard = () => {
   ];
 
   const getCurrentDayOfChallenge = () => {
-    // For fresh start, calculate based on actual progress
+    // Calculate based on actual habit data
     const daysTracked = Object.keys(habitData).length;
-    return Math.max(1, daysTracked); // Always start from at least day 1
+    return daysTracked; // Return actual days tracked (0 if no data)
   };
 
   const getTodaysProgress = () => {
-    const today = getCurrentDayOfChallenge();
+    const daysTracked = Object.keys(habitData).length;
+    if (daysTracked === 0) return 0; // No progress if no data
+    
+    const today = Math.max(1, daysTracked);
     if (!habitData[today]) return 0;
     const completed = Object.values(habitData[today]).filter(Boolean).length;
     return Math.round((completed / 6) * 100);
