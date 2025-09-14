@@ -80,7 +80,7 @@ const Dashboard = () => {
     const today = Math.max(1, daysTracked);
     if (!habitData[today]) return 0;
     const completed = Object.values(habitData[today]).filter(Boolean).length;
-    return Math.round((completed / 6) * 100);
+    return Math.round((completed / 10) * 100);
   };
 
   const getTotalHabitsCompleted = () => {
