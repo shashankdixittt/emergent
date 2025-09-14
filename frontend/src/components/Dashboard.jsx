@@ -26,25 +26,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Load habit data
-    const savedHabits = localStorage.getItem('habitTrackerData');
+    const savedHabits = DataManager.loadHabitData();
     if (savedHabits) {
-      try {
-        setHabitData(JSON.parse(savedHabits));
-      } catch (error) {
-        console.error('Error loading habit data:', error);
-        setHabitData({});
-      }
+      setHabitData(savedHabits);
     }
 
     // Load focus data
-    const savedFocus = localStorage.getItem('focusHoursData');
+    const savedFocus = DataManager.loadFocusData();
     if (savedFocus) {
-      try {
-        setFocusData(JSON.parse(savedFocus));
-      } catch (error) {
-        console.error('Error loading focus data:', error);
-        setFocusData({});
-      }
+      setFocusData(savedFocus);
     }
   }, []);
 
