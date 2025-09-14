@@ -96,10 +96,9 @@ const GoalSetting = () => {
   }, [goals]);
 
   useEffect(() => {
-    const savedHabitData = localStorage.getItem('habitTrackerData');
-    if (savedHabitData) {
-      setHabitData(JSON.parse(savedHabitData));
-    }
+    // Force clear habit data for fresh start
+    localStorage.removeItem('habitTrackerData');
+    setHabitData({});
   }, []);
 
   const handleCreateGoal = () => {
