@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Checkbox } from './ui/checkbox';
 import { Badge } from './ui/badge';
 import { Calendar, CheckCircle2, Target } from 'lucide-react';
+import DataManager from '../utils/dataManager';
 
 const HabitTracker = () => {
   const [habitData, setHabitData] = useState({});
