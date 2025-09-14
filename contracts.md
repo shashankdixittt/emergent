@@ -10,7 +10,7 @@ A comprehensive habit and focus hours tracking application with local storage fu
 - **Features**: 6 habits × 30 days checkbox grid, real-time statistics, progress tracking
 - **Habit Names**: 
   1. No Social Media
-  2. No Songs  
+  2. No Songs  ̀
   3. No Maggie/Chai/Coffee
   4. 1min Self Video Recording
   5. 45min Book Reading
