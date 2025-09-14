@@ -145,10 +145,10 @@ const HabitTracker = () => {
                       Day
                     </div>
                   </th>
-                  {habitNames.map((name, index) => (
-                    <th key={name} className="p-2 text-center font-medium text-xs min-w-[90px] whitespace-nowrap">
-                      <div className="transform -rotate-45 origin-center h-12 flex items-center justify-center">
-                        <span className="text-xs">{name}</span>
+                  {shortHabitNames.map((name, index) => (
+                    <th key={name} className="p-2 text-center font-medium text-xs min-w-[80px]">
+                      <div className="whitespace-nowrap">
+                        {name}
                       </div>
                     </th>
                   ))}
