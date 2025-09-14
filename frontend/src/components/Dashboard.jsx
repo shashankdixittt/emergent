@@ -12,7 +12,7 @@ import {
   CheckCircle2, 
   BarChart3,
   Star,
-  Fire,
+  Flame,
   Trophy
 } from 'lucide-react';
 
