@@ -1,11 +1,12 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Target, Clock, BarChart3, Home, Flag } from 'lucide-react';
+import { Target, Clock, BarChart3, Home, Flag, Timer } from 'lucide-react';
 import Dashboard from './Dashboard';
 import HabitTracker from './HabitTracker';
 import FocusHoursTracker from './FocusHoursTracker';
 import Analytics from './Analytics';
 import GoalSetting from './GoalSetting';
+import TimeTracker from './TimeTracker';
 
 const Navigation = () => {
   return (
@@ -13,7 +14,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto">
         <Tabs defaultValue="dashboard" className="w-full">
           <div className="flex justify-center mb-8">
-            <TabsList className="grid w-[600px] grid-cols-5 bg-white shadow-sm border">
+            <TabsList className="grid w-[720px] grid-cols-6 bg-white shadow-sm border">
               <TabsTrigger 
                 value="dashboard" 
                 className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
@@ -34,6 +35,13 @@ const Navigation = () => {
               >
                 <Clock className="h-4 w-4" />
                 Focus Hours
+              </TabsTrigger>
+              <TabsTrigger 
+                value="timetracker" 
+                className="flex items-center gap-2 data-[state=active]:bg-emerald-600 data-[state=active]:text-white"
+              >
+                <Timer className="h-4 w-4" />
+                Time Tracker
               </TabsTrigger>
               <TabsTrigger 
                 value="analytics" 
@@ -61,7 +69,11 @@ const Navigation = () => {
           </TabsContent>
 
           <TabsContent value="focus" className="space-y-4">
-            <FocusHoursTracker />
+            <FocusHoursTratracker />
+          </TabsContent>
+
+          <TabsContent value="timetracker" className="space-y-4">
+            <TimeTracker />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-4">
