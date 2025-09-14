@@ -63,9 +63,9 @@ const Dashboard = () => {
   ];
 
   const getCurrentDayOfChallenge = () => {
-    // For demo purposes, we'll use the current date of month
-    // In a real app, this would be calculated from the challenge start date
-    return Math.min(currentDate.getDate(), 100);
+    // For fresh start, calculate based on actual progress
+    const daysTracked = Object.keys(habitData).length;
+    return Math.max(1, daysTracked); // Always start from at least day 1
   };
 
   const getTodaysProgress = () => {
