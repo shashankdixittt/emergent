@@ -270,7 +270,6 @@ const GoalSetting = () => {
               { milestone: 75, label: "Final Stretch", description: "75% complete" },
               { milestone: 100, label: "Champion!", description: "Challenge Complete!" }
             ].map(({ milestone, label, description }) => {
-              const habitData = JSON.parse(localStorage.getItem('habitTrackerData') || '{}');
               const daysCompleted = Object.keys(habitData).length;
               const isReached = daysCompleted >= milestone;
               
@@ -283,7 +282,9 @@ const GoalSetting = () => {
                     {isReached ? (
                       <Badge variant="default" className="mt-2 bg-green-600">✅ Achieved</Badge>
                     ) : (
-                      <Badge variant="outline" className="mt-2">{milestone - daysCompleted} days to go</Badge>
+                      <Badge variant="outline" className="mt-2">
+                        {daysCompleted === 0 ? `${milestone} days to go` : `${milestone - daysCompleted} days to go`}
+                      </Badge>
                     )}
                   </div>
                 </div>
