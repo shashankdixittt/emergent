@@ -307,54 +307,6 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Weekly Analytics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              This Week's Performance
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Average Daily Habits</span>
-                <Badge variant="outline">{weeklyStats.avgHabits}/6</Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Total Focus Hours</span>
-                <Badge variant="outline">{weeklyStats.totalFocus}h</Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Daily Focus Average</span>
-                <Badge variant="outline">{weeklyStats.avgFocus}h</Badge>
-              </div>
-              <Progress value={(weeklyStats.avgHabits / 6) * 100} className="mt-2" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              Top Performing Habit
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center space-y-3">
-              <div className="text-2xl font-bold text-green-600">{topHabit.name}</div>
-              <div className="text-3xl font-bold">{topHabit.percentage}%</div>
-              <p className="text-sm text-muted-foreground">
-                Completed {topHabit.count} out of 100 days
-              </p>
-              <Progress value={topHabit.percentage} className="mt-2" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Achievements */}
       <Card>
         <CardHeader>
