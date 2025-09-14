@@ -62,17 +62,21 @@ const HabitTracker = () => {
   const getDayCompletion = (day) => {
     if (!habitData[day]) return 0;
     const completed = Object.values(habitData[day]).filter(Boolean).length;
-    return Math.round((completed / 6) * 100);
+    return Math.round((completed / 10) * 100);
   };
 
-  const habits = ['habit1', 'habit2', 'habit3', 'habit4', 'habit5', 'habit6'];
+  const habits = ['habit1', 'habit2', 'habit3', 'habit4', 'habit5', 'habit6', 'habit7', 'habit8', 'habit9', 'habit10'];
   const habitNames = [
-    'No Social Media', 
+    'No Insta/FB', 
     'No Songs', 
-    'No Maggie/Chai/Coffee', 
-    '1min Self Video Recording', 
+    'No Maggie', 
+    'Mindful Eating', 
+    'No PMO', 
+    'WakeUp @8pm', 
     '45min Book Reading', 
-    'Meditation'
+    'Meditation',
+    'Revise Notes',
+    '3hrs of Tech'
   ];
 
   return (
