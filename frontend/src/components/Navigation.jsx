@@ -69,7 +69,7 @@ const Navigation = () => {
           </TabsContent>
 
           <TabsContent value="focus" className="space-y-4">
-            <FocusHoursTratracker />
+            <FocusHoursTracker />
           </TabsContent>
 
           <TabsContent value="timetracker" className="space-y-4">
