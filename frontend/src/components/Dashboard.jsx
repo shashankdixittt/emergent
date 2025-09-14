@@ -70,10 +70,18 @@ const Dashboard = () => {
   ];
 
   const getCurrentDayOfChallenge = () => {
-    // Find the highest day number that has any habit data
-    const dayNumbers = Object.keys(habitData).map(day => parseInt(day)).filter(day => day > 0);
-    if (dayNumbers.length === 0) return 0;
-    return Math.max(...dayNumbers);
+    // Find days that have any completed habits
+    const daysWithData = Object.keys(habitData)
+      .map(day => parseInt(day))
+      .filter(day => {
+        if (habitData[day]) {
+          return Object.values(habitData[day]).some(Boolean);
+        }
+        return false;
+      })
+      .sort((a, b) => a - b); // Sort in ascending order
+    
+    return daysWithData.length > 0 ? daysWithData[daysWithData.length - 1] : 0;
   };
 
   const getTodaysProgress = () => {
