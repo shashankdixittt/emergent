@@ -161,7 +161,7 @@ const Dashboard = () => {
       title: "Week Warrior", 
       description: "7-day streak",
       completed: currentStreak >= 7,
-      icon: <Fire className="h-5 w-5" />
+      icon: <Flame className="h-5 w-5" />
     },
     {
       title: "Quarter Champion",
