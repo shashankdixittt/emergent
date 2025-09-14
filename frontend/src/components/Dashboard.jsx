@@ -24,16 +24,27 @@ const Dashboard = () => {
   const [currentDate] = useState(new Date());
 
   useEffect(() => {
-    // Force clear all data for fresh start - this ensures we start from Day 0
-    localStorage.removeItem('habitTrackerData');
-    localStorage.removeItem('focusHoursData'); 
-    localStorage.removeItem('timeEntries');
-    localStorage.removeItem('personalGoals');
-    localStorage.removeItem('dataCleared');
-    
-    // Set empty initial states
-    setHabitData({});
-    setFocusData({});
+    // Load habit data
+    const savedHabits = localStorage.getItem('habitTrackerData');
+    if (savedHabits) {
+      try {
+        setHabitData(JSON.parse(savedHabits));
+      } catch (error) {
+        console.error('Error loading habit data:', error);
+        setHabitData({});
+      }
+    }
+
+    // Load focus data
+    const savedFocus = localStorage.getItem('focusHoursData');
+    if (savedFocus) {
+      try {
+        setFocusData(JSON.parse(savedFocus));
+      } catch (error) {
+        console.error('Error loading focus data:', error);
+        setFocusData({});
+      }
+    }
   }, []);
 
   const resetAllData = () => {
