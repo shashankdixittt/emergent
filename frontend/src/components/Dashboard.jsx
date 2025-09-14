@@ -55,12 +55,16 @@ const Dashboard = () => {
   };
 
   const habitNames = [
-    'No Social Media', 
+    'No Insta/FB', 
     'No Songs', 
-    'No Maggie/Chai/Coffee', 
-    '1min Self Video Recording', 
+    'No Maggie', 
+    'Mindful Eating', 
+    'No PMO', 
+    'WakeUp @8pm', 
     '45min Book Reading', 
-    'Meditation'
+    'Meditation',
+    'Revise Notes',
+    '3hrs of Tech'
   ];
 
   const getCurrentDayOfChallenge = () => {
