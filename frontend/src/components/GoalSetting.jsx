@@ -95,6 +95,13 @@ const GoalSetting = () => {
     localStorage.setItem('personalGoals', JSON.stringify(goals));
   }, [goals]);
 
+  useEffect(() => {
+    const savedHabitData = localStorage.getItem('habitTrackerData');
+    if (savedHabitData) {
+      setHabitData(JSON.parse(savedHabitData));
+    }
+  }, []);
+
   const handleCreateGoal = () => {
     if (!newGoal.title.trim()) return;
 
