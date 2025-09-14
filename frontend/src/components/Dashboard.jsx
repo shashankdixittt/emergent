@@ -263,61 +263,6 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* Today's Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <Card className="border-l-4 border-l-blue-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Today's Progress</p>
-                <p className="text-3xl font-bold">{todayProgress}%</p>
-              </div>
-              <CheckCircle2 className="h-10 w-10 text-blue-600" />
-            </div>
-            <Progress value={todayProgress} className="mt-3" />
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-green-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Current Streak</p>
-                <p className="text-3xl font-bold">{currentStreak}</p>
-                <p className="text-xs text-muted-foreground">days</p>
-              </div>
-              <Flame className="h-10 w-10 text-green-600" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-purple-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Habits</p>
-                <p className="text-3xl font-bold">{getTotalHabitsCompleted()}</p>
-                <p className="text-xs text-muted-foreground">completed</p>
-              </div>
-              <Target className="h-10 w-10 text-purple-600" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-orange-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Focus Hours</p>
-                <p className="text-3xl font-bold">{getTotalFocusHours()}</p>
-                <p className="text-xs text-muted-foreground">total hours</p>
-              </div>
-              <Clock className="h-10 w-10 text-orange-600" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Achievements */}
       <Card>
         <CardHeader>
