@@ -70,18 +70,17 @@ const Dashboard = () => {
   ];
 
   const getCurrentDayOfChallenge = () => {
-    // Calculate based on actual habit data
-    const daysTracked = Object.keys(habitData).length;
-    return daysTracked; // Return actual days tracked (0 if no data)
+    // Find the highest day number that has any habit data
+    const dayNumbers = Object.keys(habitData).map(day => parseInt(day)).filter(day => day > 0);
+    if (dayNumbers.length === 0) return 0;
+    return Math.max(...dayNumbers);
   };
 
   const getTodaysProgress = () => {
-    const daysTracked = Object.keys(habitData).length;
-    if (daysTracked === 0) return 0; // No progress if no data
+    const currentDay = getCurrentDayOfChallenge();
+    if (currentDay === 0 || !habitData[currentDay]) return 0;
     
-    const today = Math.max(1, daysTracked);
-    if (!habitData[today]) return 0;
-    const completed = Object.values(habitData[today]).filter(Boolean).length;
+    const completed = Object.values(habitData[currentDay]).filter(Boolean).length;
     return Math.round((completed / 10) * 100);
   };
 
