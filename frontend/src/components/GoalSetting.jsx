@@ -28,6 +28,7 @@ const GoalSetting = () => {
     deadline: '',
     priority: 'medium'
   });
+  const [habitData, setHabitData] = useState({});
 
   useEffect(() => {
     const savedGoals = localStorage.getItem('personalGoals');
