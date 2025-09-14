@@ -143,7 +143,10 @@ const Dashboard = () => {
   };
 
   const getTopPerformingHabit = () => {
-    const habitCounts = { habit1: 0, habit2: 0, habit3: 0, habit4: 0, habit5: 0, habit6: 0 };
+    const habitCounts = { 
+      habit1: 0, habit2: 0, habit3: 0, habit4: 0, habit5: 0, 
+      habit6: 0, habit7: 0, habit8: 0, habit9: 0, habit10: 0 
+    };
     
     Object.values(habitData).forEach(day => {
       if (day) {
