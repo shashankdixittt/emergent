@@ -70,6 +70,8 @@ const Dashboard = () => {
       window.location.reload();
     }
   };
+
+  const habitNames = [
     'No Social Media', 
     'No Songs', 
     'No Maggie/Chai/Coffee', 
