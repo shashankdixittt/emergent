@@ -34,15 +34,15 @@ const GoalSetting = () => {
     if (savedGoals) {
       setGoals(JSON.parse(savedGoals));
     } else {
-      // Initialize with some example goals
+      // Initialize with some example goals for 100-day challenge
       const defaultGoals = [
         {
           id: Date.now() + 1,
-          title: 'Complete 80% of habits this month',
-          description: 'Maintain consistency in daily habits to build strong routines',
+          title: 'Complete 80% of habits in 100-day challenge',
+          description: 'Maintain consistency in daily habits to build strong routines over 100 days',
           category: 'habits',
           target: '80%',
-          deadline: '2025-02-28',
+          deadline: '2025-05-08', // ~100 days from now
           priority: 'high',
           progress: 0,
           completed: false,
@@ -50,11 +50,35 @@ const GoalSetting = () => {
         },
         {
           id: Date.now() + 2,
-          title: 'Achieve 200 total focus hours',
-          description: 'Increase productivity through focused work sessions',
+          title: 'Achieve 750 total focus hours',
+          description: 'Increase productivity through focused work sessions over 100 days',
           category: 'productivity',
-          target: '200 hours',
-          deadline: '2025-02-28',
+          target: '750 hours',
+          deadline: '2025-05-08',
+          priority: 'medium',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 3,
+          title: 'Reach 50-day milestone',
+          description: 'Complete half of the 100-day challenge successfully',
+          category: 'personal',
+          target: '50 days',
+          deadline: '2025-03-18', // ~50 days from now
+          priority: 'high',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 4,
+          title: 'Maintain 14-day streak',
+          description: 'Build momentum with a 2-week consistent habit streak',
+          category: 'habits',
+          target: '14 days',
+          deadline: '2025-02-15', // ~2 weeks from now
           priority: 'medium',
           progress: 0,
           completed: false,
@@ -115,17 +139,44 @@ const GoalSetting = () => {
     const habitData = JSON.parse(localStorage.getItem('habitTrackerData') || '{}');
     const focusData = JSON.parse(localStorage.getItem('focusHoursData') || '{}');
 
+    // 100-day challenge specific calculations
     if (goal.category === 'habits' && goal.title.includes('80%')) {
-      const totalPossible = 180; // 30 days * 6 habits
+      const totalPossible = 600; // 100 days * 6 habits
       const completed = Object.values(habitData).reduce((sum, day) => {
         return sum + Object.values(day || {}).filter(Boolean).length;
       }, 0);
       return Math.round((completed / totalPossible) * 100);
     }
 
-    if (goal.category === 'productivity' && goal.title.includes('200')) {
+    if (goal.category === 'productivity' && goal.title.includes('750')) {
       const totalHours = Object.values(focusData).reduce((sum, hours) => sum + (hours || 0), 0);
-      return Math.round((totalHours / 200) * 100);
+      return Math.round((totalHours / 750) * 100);
+    }
+
+    if (goal.category === 'personal' && goal.title.includes('50-day')) {
+      const daysTracked = Object.keys(habitData).length;
+      return Math.round((daysTracked / 50) * 100);
+    }
+
+    if (goal.category === 'habits' && goal.title.includes('14-day')) {
+      // Calculate current streak
+      const daysTracked = Object.keys(habitData).sort((a, b) => b - a); // Reverse order
+      let streak = 0;
+      
+      for (const day of daysTracked) {
+        if (habitData[day]) {
+          const completed = Object.values(habitData[day]).filter(Boolean).length;
+          if (completed >= 4) { // At least 4 habits
+            streak++;
+          } else {
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+      
+      return Math.round((Math.min(streak, 14) / 14) * 100);
     }
 
     return goal.progress;
@@ -163,10 +214,10 @@ const GoalSetting = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Target className="h-8 w-8 text-green-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-            Goals & Objectives
+            100-Day Challenge Goals
           </h1>
         </div>
-        <p className="text-muted-foreground">Set and track your personal development goals</p>
+        <p className="text-muted-foreground">Set and track your personal development goals for the 100-day journey</p>
       </div>
 
       {/* Goal Statistics */}
@@ -203,11 +254,50 @@ const GoalSetting = () => {
         </Card>
       </div>
 
+      {/* 100-Day Challenge Milestones */}
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-800">
+            <Flag className="h-5 w-5" />
+            100-Day Challenge Milestones
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[
+              { milestone: 25, label: "Quarter Goal", description: "25% complete" },
+              { milestone: 50, label: "Halfway Point", description: "50% complete" },
+              { milestone: 75, label: "Final Stretch", description: "75% complete" },
+              { milestone: 100, label: "Champion!", description: "Challenge Complete!" }
+            ].map(({ milestone, label, description }) => {
+              const habitData = JSON.parse(localStorage.getItem('habitTrackerData') || '{}');
+              const daysCompleted = Object.keys(habitData).length;
+              const isReached = daysCompleted >= milestone;
+              
+              return (
+                <div key={milestone} className={`p-4 rounded-lg border-2 ${isReached ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white'}`}>
+                  <div className={`text-center ${isReached ? 'text-green-800' : 'text-gray-600'}`}>
+                    <div className="text-2xl font-bold">{milestone}</div>
+                    <h4 className="font-semibold">{label}</h4>
+                    <p className="text-sm">{description}</p>
+                    {isReached ? (
+                      <Badge variant="default" className="mt-2 bg-green-600">✅ Achieved</Badge>
+                    ) : (
+                      <Badge variant="outline" className="mt-2">{milestone - daysCompleted} days to go</Badge>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Create New Goal */}
       <Card>
         <CardHeader>
           <div className="flex justify-between items-center">
-            <CardTitle>Your Goals</CardTitle>
+            <CardTitle>Your 100-Day Goals</CardTitle>
             <Button 
               onClick={() => setIsCreating(!isCreating)}
               className="flex items-center gap-2"
@@ -243,7 +333,7 @@ const GoalSetting = () => {
                     <option value="health">Health</option>
                   </select>
                   <Input
-                    placeholder="Target (e.g., 80%, 100 hours)"
+                    placeholder="Target (e.g., 80%, 500 hours)"
                     value={newGoal.target}
                     onChange={(e) => setNewGoal({...newGoal, target: e.target.value})}
                   />
@@ -363,11 +453,11 @@ const GoalSetting = () => {
             {goals.length === 0 && (
               <div className="text-center py-12">
                 <Target className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No goals set yet</h3>
+                <h3 className="text-lg font-semibold mb-2">No goals set for your 100-day challenge</h3>
                 <p className="text-muted-foreground mb-4">Create your first goal to start tracking progress</p>
                 <Button onClick={() => setIsCreating(true)}>
                   <Plus className="h-4 w-4 mr-2" />
-                  Create Your First Goal
+                  Create Your First 100-Day Goal
                 </Button>
               </div>
             )}
