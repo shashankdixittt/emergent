@@ -32,29 +32,12 @@ const TimeTracker = () => {
 
   // Initialize fresh state
   useEffect(() => {
+    // Force clear time entries for fresh start
+    localStorage.removeItem('timeEntries');
+    setTimeEntries([]);
+    
     // Set today as the selected date
     setSelectedDate(new Date());
-    
-    // Load saved time entries
-    const savedEntries = localStorage.getItem('timeEntries');
-    if (savedEntries) {
-      try {
-        const parsedEntries = JSON.parse(savedEntries).map(entry => ({
-          ...entry,
-          startTime: new Date(entry.startTime),
-          endTime: new Date(entry.endTime)
-        }));
-        setTimeEntries(parsedEntries);
-      } catch (error) {
-        console.error('Error loading time entries:', error);
-        // Clear corrupted data
-        localStorage.removeItem('timeEntries');
-        setTimeEntries([]);
-      }
-    } else {
-      // Start with empty entries for fresh experience
-      setTimeEntries([]);
-    }
   }, []);
 
   // Save time entries to localStorage
