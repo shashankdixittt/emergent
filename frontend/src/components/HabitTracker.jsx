@@ -92,16 +92,16 @@ const HabitTracker = () => {
       </div>
 
       {/* Habit Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+      <div className="grid grid-cols-10 gap-3 mb-6">
         {habits.map((habit, index) => (
           <Card key={habit} className="border-l-4 border-l-blue-500 hover:shadow-md transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex flex-col">
+            <CardContent className="p-3">
+              <div className="flex flex-col text-center">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-1">{habitNames[index]}</p>
-                  <p className="text-lg font-bold">{getCompletionCount(habit)}/100</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-1 truncate">{habitNames[index]}</p>
+                  <p className="text-sm font-bold">{getCompletionCount(habit)}/100</p>
                 </div>
-                <Badge variant={getCompletionPercentage(habit) >= 70 ? "default" : "secondary"} className="mt-2 w-fit">
+                <Badge variant={getCompletionPercentage(habit) >= 70 ? "default" : "secondary"} className="mt-1 w-fit mx-auto text-xs">
                   {getCompletionPercentage(habit)}%
                 </Badge>
               </div>
