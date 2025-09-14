@@ -53,7 +53,23 @@ const Dashboard = () => {
     }
   }, []);
 
-  const habitNames = [
+  const resetAllData = () => {
+    if (window.confirm('Are you sure you want to reset ALL data and start the 100-day challenge from Day 1? This will clear all habits, focus hours, time entries, and goals.')) {
+      // Clear all stored data
+      localStorage.removeItem('habitTrackerData');
+      localStorage.removeItem('focusHoursData'); 
+      localStorage.removeItem('timeEntries');
+      localStorage.removeItem('personalGoals');
+      localStorage.removeItem('dataCleared');
+      
+      // Reset all states
+      setHabitData({});
+      setFocusData({});
+      
+      // Reload the page to ensure fresh start
+      window.location.reload();
+    }
+  };
     'No Social Media', 
     'No Songs', 
     'No Maggie/Chai/Coffee', 
