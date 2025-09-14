@@ -22,16 +22,34 @@ const Dashboard = () => {
   const [currentDate] = useState(new Date());
 
   useEffect(() => {
-    // Load habit data
-    const savedHabits = localStorage.getItem('habitTrackerData');
-    if (savedHabits) {
-      setHabitData(JSON.parse(savedHabits));
-    }
+    // Clear all old data for fresh start
+    const shouldClearData = !localStorage.getItem('dataCleared');
+    
+    if (shouldClearData) {
+      // Clear all habit tracker related data
+      localStorage.removeItem('habitTrackerData');
+      localStorage.removeItem('focusHoursData'); 
+      localStorage.removeItem('timeEntries');
+      localStorage.removeItem('personalGoals');
+      
+      // Mark data as cleared
+      localStorage.setItem('dataCleared', 'true');
+      
+      // Set empty initial states
+      setHabitData({});
+      setFocusData({});
+    } else {
+      // Load habit data
+      const savedHabits = localStorage.getItem('habitTrackerData');
+      if (savedHabits) {
+        setHabitData(JSON.parse(savedHabits));
+      }
 
-    // Load focus data
-    const savedFocus = localStorage.getItem('focusHoursData');
-    if (savedFocus) {
-      setFocusData(JSON.parse(savedFocus));
+      // Load focus data
+      const savedFocus = localStorage.getItem('focusHoursData');
+      if (savedFocus) {
+        setFocusData(JSON.parse(savedFocus));
+      }
     }
   }, []);
 
