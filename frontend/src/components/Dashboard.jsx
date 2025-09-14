@@ -43,12 +43,14 @@ const Dashboard = () => {
     'Meditation'
   ];
 
-  const getCurrentDayOfMonth = () => {
-    return currentDate.getDate();
+  const getCurrentDayOfChallenge = () => {
+    // For demo purposes, we'll use the current date of month
+    // In a real app, this would be calculated from the challenge start date
+    return Math.min(currentDate.getDate(), 100);
   };
 
   const getTodaysProgress = () => {
-    const today = getCurrentDayOfMonth();
+    const today = getCurrentDayOfChallenge();
     if (!habitData[today]) return 0;
     const completed = Object.values(habitData[today]).filter(Boolean).length;
     return Math.round((completed / 6) * 100);
@@ -69,7 +71,7 @@ const Dashboard = () => {
   };
 
   const getCurrentStreak = () => {
-    const today = getCurrentDayOfMonth();
+    const today = getCurrentDayOfChallenge();
     let streak = 0;
     
     for (let day = today; day >= 1; day--) {
@@ -88,7 +90,7 @@ const Dashboard = () => {
   };
 
   const getWeeklyStats = () => {
-    const today = getCurrentDayOfMonth();
+    const today = getCurrentDayOfChallenge();
     const weekStart = Math.max(1, today - 6);
     
     let weeklyHabits = 0;
@@ -131,14 +133,21 @@ const Dashboard = () => {
     return {
       name: habitNames[habitIndex],
       count: habitCounts[topHabit],
-      percentage: Math.round((habitCounts[topHabit] / 30) * 100)
+      percentage: Math.round((habitCounts[topHabit] / 100) * 100)
     };
+  };
+
+  const get100DayProgress = () => {
+    const daysTracked = Object.keys(habitData).length;
+    const progressPercentage = Math.round((daysTracked / 100) * 100);
+    return { daysTracked, progressPercentage };
   };
 
   const weeklyStats = getWeeklyStats();
   const topHabit = getTopPerformingHabit();
   const todayProgress = getTodaysProgress();
   const currentStreak = getCurrentStreak();
+  const challengeProgress = get100DayProgress();
 
   const achievements = [
     {
@@ -154,16 +163,28 @@ const Dashboard = () => {
       icon: <Fire className="h-5 w-5" />
     },
     {
+      title: "Quarter Champion",
+      description: "Complete 25 days",
+      completed: challengeProgress.daysTracked >= 25,
+      icon: <Award className="h-5 w-5" />
+    },
+    {
+      title: "Halfway Hero",
+      description: "Complete 50 days",
+      completed: challengeProgress.daysTracked >= 50,
+      icon: <Star className="h-5 w-5" />
+    },
+    {
       title: "Focus Master",
-      description: "100+ focus hours",
-      completed: getTotalFocusHours() >= 100,
+      description: "500+ focus hours",
+      completed: getTotalFocusHours() >= 500,
       icon: <Clock className="h-5 w-5" />
     },
     {
-      title: "Habit Champion",
-      description: "80% completion rate",
-      completed: (getTotalHabitsCompleted() / 180) >= 0.8,
-      icon: <Award className="h-5 w-5" />
+      title: "100-Day Legend",
+      description: "Complete the challenge",
+      completed: challengeProgress.daysTracked >= 100,
+      icon: <Trophy className="h-5 w-5" />
     }
   ];
 
@@ -173,11 +194,30 @@ const Dashboard = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <BarChart3 className="h-8 w-8 text-blue-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Personal Development Dashboard
+            100-Day Challenge Dashboard
           </h1>
         </div>
         <p className="text-muted-foreground">Your comprehensive progress overview and insights</p>
       </div>
+
+      {/* 100-Day Challenge Progress */}
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-xl font-bold text-blue-800">100-Day Challenge Progress</h3>
+              <p className="text-blue-600">Day {challengeProgress.daysTracked} of 100</p>
+            </div>
+            <div className="text-3xl font-bold text-blue-600">
+              {challengeProgress.progressPercentage}%
+            </div>
+          </div>
+          <Progress value={challengeProgress.progressPercentage} className="h-3" />
+          <p className="text-sm text-blue-700 mt-2">
+            {100 - challengeProgress.daysTracked} days remaining
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Today's Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -274,7 +314,7 @@ const Dashboard = () => {
               <div className="text-2xl font-bold text-green-600">{topHabit.name}</div>
               <div className="text-3xl font-bold">{topHabit.percentage}%</div>
               <p className="text-sm text-muted-foreground">
-                Completed {topHabit.count} out of 30 days
+                Completed {topHabit.count} out of 100 days
               </p>
               <Progress value={topHabit.percentage} className="mt-2" />
             </div>
@@ -287,11 +327,11 @@ const Dashboard = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Award className="h-5 w-5" />
-            Achievements & Milestones
+            100-Day Challenge Achievements
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {achievements.map((achievement, index) => (
               <div 
                 key={index}
@@ -319,12 +359,12 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* Quick Actions */}
+      {/* Quick Insights */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Zap className="h-5 w-5" />
-            Quick Insights
+            100-Day Challenge Insights
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -332,7 +372,7 @@ const Dashboard = () => {
             <div className="text-center p-4 bg-blue-50 rounded-lg">
               <h4 className="font-semibold text-blue-800 mb-2">Consistency Score</h4>
               <div className="text-2xl font-bold text-blue-600">
-                {Math.round((getTotalHabitsCompleted() / 180) * 100)}%
+                {Math.round((getTotalHabitsCompleted() / 600) * 100)}%
               </div>
               <p className="text-sm text-blue-600">Overall completion rate</p>
             </div>
@@ -342,15 +382,15 @@ const Dashboard = () => {
               <div className="text-2xl font-bold text-purple-600">
                 {Object.keys(habitData).length}
               </div>
-              <p className="text-sm text-purple-600">Out of 30 days</p>
+              <p className="text-sm text-purple-600">Out of 100 days</p>
             </div>
             
             <div className="text-center p-4 bg-green-50 rounded-lg">
-              <h4 className="font-semibold text-green-800 mb-2">Focus Productivity</h4>
+              <h4 className="font-semibold text-green-800 mb-2">Focus Target</h4>
               <div className="text-2xl font-bold text-green-600">
-                {Math.round((getTotalFocusHours() / 300) * 100)}%
+                {Math.round((getTotalFocusHours() / 1000) * 100)}%
               </div>
-              <p className="text-sm text-green-600">Of target 300h/month</p>
+              <p className="text-sm text-green-600">Of target 1000h/100days</p>
             </div>
           </div>
         </CardContent>

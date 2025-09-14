@@ -7,7 +7,7 @@ const FocusHoursTracker = () => {
   const [focusData, setFocusData] = useState({});
 
   const hourOptions = [0, 2, 4, 6, 8, 10];
-  const days = Array.from({ length: 30 }, (_, i) => i + 1);
+  const days = Array.from({ length: 100 }, (_, i) => i + 1);
 
   // Initialize focus data
   useEffect(() => {
@@ -17,7 +17,7 @@ const FocusHoursTracker = () => {
     } else {
       // Initialize with some sample data
       const initialData = {};
-      for (let day = 1; day <= 30; day++) {
+      for (let day = 1; day <= 100; day++) {
         initialData[day] = Math.floor(Math.random() * 6) * 2; // Random hours: 0,2,4,6,8,10
       }
       setFocusData(initialData);
@@ -56,7 +56,7 @@ const FocusHoursTracker = () => {
 
   const getAverageHours = () => {
     const total = getTotalHours();
-    return Math.round((total / 30) * 10) / 10;
+    return Math.round((total / 100) * 10) / 10;
   };
 
   const getStreakInfo = () => {
@@ -74,7 +74,7 @@ const FocusHoursTracker = () => {
     });
 
     // Calculate current streak from the end
-    for (let i = 30; i >= 1; i--) {
+    for (let i = 100; i >= 1; i--) {
       if (focusData[i] >= 4) {
         currentStreak++;
       } else {
@@ -85,7 +85,17 @@ const FocusHoursTracker = () => {
     return { current: currentStreak, max: maxStreak };
   };
 
+  const get100DayGoals = () => {
+    const total = getTotalHours();
+    return {
+      goal500: { target: 500, progress: Math.min(100, (total / 500) * 100), achieved: total >= 500 },
+      goal750: { target: 750, progress: Math.min(100, (total / 750) * 100), achieved: total >= 750 },
+      goal1000: { target: 1000, progress: Math.min(100, (total / 1000) * 100), achieved: total >= 1000 }
+    };
+  };
+
   const streak = getStreakInfo();
+  const goals = get100DayGoals();
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6 space-y-6">
@@ -93,10 +103,10 @@ const FocusHoursTracker = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="h-8 w-8 text-purple-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Focus Hours Tracker
+            Focus Hours Tracker - 100 Days
           </h1>
         </div>
-        <p className="text-muted-foreground">Visual tracking of your daily focused work sessions</p>
+        <p className="text-muted-foreground">Visual tracking of your daily focused work sessions over 100 days</p>
       </div>
 
       {/* Stats Overview */}
@@ -152,12 +162,40 @@ const FocusHoursTracker = () => {
         </Card>
       </div>
 
+      {/* 100-Day Focus Goals */}
+      <Card>
+        <CardHeader>
+          <CardTitle>100-Day Focus Goals</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {Object.entries(goals).map(([key, goal]) => (
+              <div key={key} className={`p-4 rounded-lg border-2 ${goal.achieved ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="font-semibold">{goal.target}h Challenge</h4>
+                  {goal.achieved && <span className="text-green-600">🎯</span>}
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div 
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                    style={{ width: `${goal.progress}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {Math.round(goal.progress)}% Complete
+                </p>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Main Focus Hours Grid */}
       <Card className="overflow-hidden">
         <CardHeader>
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-purple-600" />
-            <CardTitle>30-Day Focus Hours Grid</CardTitle>
+            <CardTitle>100-Day Focus Hours Grid</CardTitle>
           </div>
           <p className="text-sm text-muted-foreground">
             Click on dots to set focus hours for each day. Graph shows daily trends.
@@ -173,8 +211,8 @@ const FocusHoursTracker = () => {
                     Hours
                   </th>
                   {days.map(day => (
-                    <th key={day} className="p-2 text-center font-medium text-xs min-w-[40px]">
-                      Day {day}
+                    <th key={day} className="p-2 text-center font-medium text-xs min-w-[35px]">
+                      {day % 10 === 0 ? `D${day}` : day}
                     </th>
                   ))}
                 </tr>
@@ -186,12 +224,12 @@ const FocusHoursTracker = () => {
                       {hours}hrs
                     </td>
                     {days.map(day => (
-                      <td key={`${hours}-${day}`} className="p-2 text-center">
+                      <td key={`${hours}-${day}`} className="p-1 text-center">
                         <button
                           onClick={() => handleCellClick(day, hours)}
                           className={`
-                            w-6 h-6 rounded-full border-2 border-white transition-all duration-200 
-                            hover:scale-125 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500
+                            w-5 h-5 rounded-full border border-white transition-all duration-200 
+                            hover:scale-125 hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-blue-500
                             ${focusData[day] === hours 
                               ? `${getColorForHours(hours)} shadow-md` 
                               : 'bg-gray-200 hover:bg-gray-300'
@@ -211,12 +249,12 @@ const FocusHoursTracker = () => {
           <div className="p-6 border-t">
             <h4 className="font-medium mb-4 flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Daily Progress Trend
+              100-Day Progress Trend
             </h4>
             <div className="relative">
               <svg 
-                className="w-full h-32 border rounded-lg bg-muted/20" 
-                viewBox="0 0 900 120"
+                className="w-full h-40 border rounded-lg bg-muted/20" 
+                viewBox="0 0 3000 150"
               >
                 <defs>
                   <linearGradient id="trendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -226,8 +264,13 @@ const FocusHoursTracker = () => {
                 </defs>
                 
                 {/* Grid lines */}
-                {[20, 40, 60, 80, 100].map(y => (
-                  <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#e5e7eb" strokeWidth="1" />
+                {[25, 50, 75, 100, 125].map(y => (
+                  <line key={y} x1="0" y1={y} x2="3000" y2={y} stroke="#e5e7eb" strokeWidth="1" />
+                ))}
+                
+                {/* Week markers */}
+                {Array.from({ length: 14 }, (_, i) => (i + 1) * 7).map(weekDay => (
+                  <line key={weekDay} x1={weekDay * 30} y1="0" x2={weekDay * 30} y2="150" stroke="#d1d5db" strokeWidth="1" strokeDasharray="2,2" />
                 ))}
                 
                 {/* Trend line and dots */}
@@ -238,9 +281,9 @@ const FocusHoursTracker = () => {
                   const currentX = (day - 1) * 30 + 15;
                   const nextX = day * 30 + 15;
                   
-                  // Y position (inverted - 0 is at bottom, 120 at top)
-                  const currentY = 100 - (currentHours / 10) * 80;
-                  const nextY = 100 - (nextHours / 10) * 80;
+                  // Y position (inverted - 0 is at bottom, 150 at top)
+                  const currentY = 125 - (currentHours / 10) * 100;
+                  const nextY = 125 - (nextHours / 10) * 100;
                   
                   const strokeColor = currentHours > nextHours ? '#ef4444' : 
                                    currentHours < nextHours ? '#10b981' : '#6b7280';
@@ -261,20 +304,20 @@ const FocusHoursTracker = () => {
                       <circle
                         cx={currentX}
                         cy={currentY}
-                        r="3"
+                        r="2"
                         fill="url(#trendGradient)"
                         stroke="white"
-                        strokeWidth="2"
+                        strokeWidth="1"
                       />
                       {/* Last point */}
-                      {day === 29 && (
+                      {day === 99 && (
                         <circle
                           cx={nextX}
                           cy={nextY}
-                          r="3"
+                          r="2"
                           fill="url(#trendGradient)"
                           stroke="white"
-                          strokeWidth="2"
+                          strokeWidth="1"
                         />
                       )}
                     </g>
@@ -285,13 +328,14 @@ const FocusHoursTracker = () => {
               {/* X-axis labels */}
               <div className="flex justify-between text-xs text-muted-foreground mt-2">
                 <span>Day 1</span>
-                <span>Day 10</span>
-                <span>Day 20</span>
-                <span>Day 30</span>
+                <span>Day 25</span>
+                <span>Day 50</span>
+                <span>Day 75</span>
+                <span>Day 100</span>
               </div>
               
               {/* Y-axis labels */}
-              <div className="absolute left-0 top-0 h-32 flex flex-col justify-between text-xs text-muted-foreground -ml-8">
+              <div className="absolute left-0 top-0 h-40 flex flex-col justify-between text-xs text-muted-foreground -ml-8">
                 <span>10h</span>
                 <span>8h</span>
                 <span>6h</span>
@@ -317,6 +361,7 @@ const FocusHoursTracker = () => {
               <div className="text-xs text-muted-foreground">
                 <p><strong>Trend Lines:</strong> 🟢 Green (increasing) • 🔴 Red (decreasing) • ⚫ Gray (stable)</p>
                 <p><strong>Usage:</strong> Click colored dots in the grid to set daily focus hours</p>
+                <p><strong>100-Day Challenge:</strong> Aim for 500-1000 total focus hours!</p>
               </div>
             </div>
           </div>

@@ -13,9 +13,9 @@ const HabitTracker = () => {
     if (savedData) {
       setHabitData(JSON.parse(savedData));
     } else {
-      // Initialize with empty data for 30 days and 6 habits
+      // Initialize with empty data for 100 days and 6 habits
       const initialData = {};
-      for (let day = 1; day <= 30; day++) {
+      for (let day = 1; day <= 100; day++) {
         initialData[day] = {
           habit1: false,
           habit2: false,
@@ -52,7 +52,7 @@ const HabitTracker = () => {
 
   const getCompletionPercentage = (habit) => {
     const count = getCompletionCount(habit);
-    return Math.round((count / 30) * 100);
+    return Math.round((count / 100) * 100);
   };
 
   const getDayCompletion = (day) => {
@@ -77,10 +77,10 @@ const HabitTracker = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Target className="h-8 w-8 text-blue-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Protocol Tracker
+            Protocol Tracker - 100 Days Challenge
           </h1>
         </div>
-        <p className="text-muted-foreground">Track your daily habits and build consistent routines</p>
+        <p className="text-muted-foreground">Track your daily habits and build consistent routines over 100 days</p>
       </div>
 
       {/* Habit Stats Overview */}
@@ -91,7 +91,7 @@ const HabitTracker = () => {
               <div className="flex flex-col">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-1">{habitNames[index]}</p>
-                  <p className="text-lg font-bold">{getCompletionCount(habit)}/30</p>
+                  <p className="text-lg font-bold">{getCompletionCount(habit)}/100</p>
                 </div>
                 <Badge variant={getCompletionPercentage(habit) >= 70 ? "default" : "secondary"} className="mt-2 w-fit">
                   {getCompletionPercentage(habit)}%
@@ -107,7 +107,7 @@ const HabitTracker = () => {
         <CardHeader>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-5 w-5 text-green-600" />
-            <CardTitle>30-Day Habit Tracker</CardTitle>
+            <CardTitle>100-Day Habit Tracker</CardTitle>
           </div>
         </CardHeader>
         <CardContent className="p-0">
@@ -130,10 +130,17 @@ const HabitTracker = () => {
                 </tr>
               </thead>
               <tbody>
-                {Array.from({ length: 30 }, (_, i) => i + 1).map(day => (
+                {Array.from({ length: 100 }, (_, i) => i + 1).map(day => (
                   <tr key={day} className="border-b hover:bg-muted/30 transition-colors">
                     <td className="sticky left-0 z-10 bg-background p-3 font-medium border-r">
-                      Day {day}
+                      <div className="flex flex-col">
+                        <span>Day {day}</span>
+                        {day % 10 === 0 && (
+                          <Badge variant="outline" className="text-xs mt-1 w-fit">
+                            Week {Math.ceil(day / 7)}
+                          </Badge>
+                        )}
+                      </div>
                     </td>
                     {habits.map((habit, habitIndex) => (
                       <td key={habit} className="p-3 text-center">
@@ -163,6 +170,40 @@ const HabitTracker = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 100-Day Milestones */}
+      <Card>
+        <CardHeader>
+          <CardTitle>100-Day Challenge Milestones</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[
+              { milestone: 25, label: "Quarter Way", color: "bg-yellow-500" },
+              { milestone: 50, label: "Halfway Point", color: "bg-orange-500" },
+              { milestone: 75, label: "Three Quarters", color: "bg-purple-500" },
+              { milestone: 100, label: "Challenge Complete!", color: "bg-green-500" }
+            ].map(({ milestone, label, color }) => {
+              const daysCompleted = Object.keys(habitData).filter(day => 
+                habitData[day] && Object.values(habitData[day]).some(Boolean)
+              ).length;
+              const isReached = daysCompleted >= milestone;
+              
+              return (
+                <div key={milestone} className={`p-4 rounded-lg border-2 ${isReached ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                  <div className={`w-8 h-8 rounded-full ${color} flex items-center justify-center text-white font-bold text-sm mb-2 ${!isReached && 'opacity-50'}`}>
+                    {milestone}
+                  </div>
+                  <h4 className="font-semibold">{label}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {isReached ? "✅ Achieved!" : `${milestone - daysCompleted} days to go`}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </CardContent>
       </Card>

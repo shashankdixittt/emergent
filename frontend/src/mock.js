@@ -2,7 +2,7 @@
 
 export const mockHabitData = () => {
   const data = {};
-  for (let day = 1; day <= 30; day++) {
+  for (let day = 1; day <= 100; day++) {
     data[day] = {
       habit1: Math.random() > 0.3, // 70% completion rate - No Social Media
       habit2: Math.random() > 0.4, // 60% completion rate - No Songs
@@ -19,7 +19,7 @@ export const mockFocusHoursData = () => {
   const data = {};
   const hourOptions = [0, 2, 4, 6, 8, 10];
   
-  for (let day = 1; day <= 30; day++) {
+  for (let day = 1; day <= 100; day++) {
     // Create a realistic pattern with some randomness
     let baseHours;
     if (day % 7 === 0 || day % 7 === 6) { // Weekends - lower hours
