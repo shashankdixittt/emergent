@@ -105,7 +105,7 @@ const Dashboard = () => {
     for (let day = daysTracked; day >= 1; day--) {
       if (habitData[day]) {
         const completed = Object.values(habitData[day]).filter(Boolean).length;
-        if (completed >= 4) { // At least 4 habits completed
+        if (completed >= 7) { // At least 7 out of 10 habits completed
           streak++;
         } else {
           break;
