@@ -113,10 +113,11 @@ const Dashboard = () => {
   };
 
   const getCurrentStreak = () => {
-    const today = getCurrentDayOfChallenge();
-    let streak = 0;
+    const daysTracked = Object.keys(habitData).length;
+    if (daysTracked === 0) return 0; // No streak if no data
     
-    for (let day = today; day >= 1; day--) {
+    let streak = 0;
+    for (let day = daysTracked; day >= 1; day--) {
       if (habitData[day]) {
         const completed = Object.values(habitData[day]).filter(Boolean).length;
         if (completed >= 4) { // At least 4 habits completed
