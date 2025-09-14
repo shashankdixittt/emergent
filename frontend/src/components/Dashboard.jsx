@@ -232,6 +232,10 @@ const Dashboard = () => {
           </h1>
         </div>
         <p className="text-muted-foreground">Your comprehensive progress overview and insights</p>
+        <div className="mt-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
+          <h2 className="text-2xl font-bold text-green-700">Hi Shashank! 👋</h2>
+          <p className="text-green-600 mt-1">Welcome to your personal development journey</p>
+        </div>
       </div>
 
       {/* 100-Day Challenge Progress */}
