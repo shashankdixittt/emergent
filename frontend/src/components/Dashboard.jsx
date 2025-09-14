@@ -170,11 +170,11 @@ const Dashboard = () => {
   };
 
   const get100DayProgress = () => {
-    const daysTracked = Object.keys(habitData).length;
-    const progressPercentage = Math.round((daysTracked / 100) * 100);
+    const currentDay = getCurrentDayOfChallenge();
+    const progressPercentage = currentDay > 0 ? Math.round((currentDay / 100) * 100) : 0;
     return { 
-      daysTracked: daysTracked || 0, // Ensure we show 0 for fresh start
-      progressPercentage: progressPercentage || 0 
+      daysTracked: currentDay, 
+      progressPercentage: progressPercentage 
     };
   };
 
