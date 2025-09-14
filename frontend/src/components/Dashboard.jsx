@@ -14,7 +14,8 @@ import {
   BarChart3,
   Star,
   Flame,
-  Trophy
+  Trophy,
+  Trash2
 } from 'lucide-react';
 
 const Dashboard = () => {
