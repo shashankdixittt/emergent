@@ -13,7 +13,7 @@ const HabitTracker = () => {
     if (savedData) {
       setHabitData(JSON.parse(savedData));
     } else {
-      // Initialize with empty data for 100 days and 6 habits
+      // Initialize with empty data for 100 days and 10 habits
       const initialData = {};
       for (let day = 1; day <= 100; day++) {
         initialData[day] = {
@@ -23,6 +23,10 @@ const HabitTracker = () => {
           habit4: false,
           habit5: false,
           habit6: false,
+          habit7: false,
+          habit8: false,
+          habit9: false,
+          habit10: false,
         };
       }
       setHabitData(initialData);
