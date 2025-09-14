@@ -30,22 +30,30 @@ const TimeTracker = () => {
 
   const projects = ['Work', 'Personal', 'Learning', 'Exercise', 'Focus Time', 'Reading', 'Meditation'];
 
-  // Load saved time entries
+  // Initialize fresh state
   useEffect(() => {
+    // Set today as the selected date
+    setSelectedDate(new Date());
+    
+    // Load saved time entries
     const savedEntries = localStorage.getItem('timeEntries');
     if (savedEntries) {
       try {
-        setTimeEntries(JSON.parse(savedEntries).map(entry => ({
+        const parsedEntries = JSON.parse(savedEntries).map(entry => ({
           ...entry,
           startTime: new Date(entry.startTime),
           endTime: new Date(entry.endTime)
-        })));
+        }));
+        setTimeEntries(parsedEntries);
       } catch (error) {
         console.error('Error loading time entries:', error);
         // Clear corrupted data
         localStorage.removeItem('timeEntries');
         setTimeEntries([]);
       }
+    } else {
+      // Start with empty entries for fresh experience
+      setTimeEntries([]);
     }
   }, []);
 
