@@ -85,10 +85,10 @@ const HabitTracker = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Target className="h-8 w-8 text-blue-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Protocol Tracker - 100 Days Challenge
+            100-Day Protocol Challenge
           </h1>
         </div>
-        <p className="text-muted-foreground">Track your daily habits and build consistent routines over 100 days</p>
+        <p className="text-muted-foreground">Track your 10 daily protocols and build consistent habits over 100 days</p>
       </div>
 
       {/* Habit Stats Overview */}
