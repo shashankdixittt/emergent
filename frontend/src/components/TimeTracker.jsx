@@ -344,13 +344,26 @@ const TimeTracker = () => {
       {/* Selected Day Entries */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <CalendarIcon className="h-5 w-5" />
-            {selectedDate.toLocaleDateString()} - Time Entries
-            <Badge variant="outline">
-              Total: {formatDuration(getDayTotal(selectedDate))}
-            </Badge>
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="h-5 w-5" />
+              <CardTitle>
+                {selectedDate.toLocaleDateString()} - Time Entries
+              </CardTitle>
+              <Badge variant="outline">
+                Total: {formatDuration(getDayTotal(selectedDate))}
+              </Badge>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={clearAllData}
+              className="text-red-600 hover:bg-red-50"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Clear All Data
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {selectedDateEntries.length === 0 ? (
