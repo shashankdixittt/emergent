@@ -238,6 +238,15 @@ const Dashboard = () => {
           </h1>
         </div>
         <p className="text-muted-foreground">Your comprehensive progress overview and insights</p>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={resetAllData}
+          className="mt-4 text-red-600 hover:bg-red-50"
+        >
+          <Trash2 className="h-4 w-4 mr-2" />
+          Reset to Day 1
+        </Button>
       </div>
 
       {/* 100-Day Challenge Progress */}
