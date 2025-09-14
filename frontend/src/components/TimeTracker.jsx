@@ -22,7 +22,10 @@ const TimeTracker = () => {
   const [currentActivity, setCurrentActivity] = useState('');
   const [currentProject, setCurrentProject] = useState('Work');
   const [timeEntries, setTimeEntries] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(() => {
+    // Always start with today's date
+    return new Date();
+  });
   const [editingEntry, setEditingEntry] = useState(null);
 
   const projects = ['Work', 'Personal', 'Learning', 'Exercise', 'Focus Time', 'Reading', 'Meditation'];
