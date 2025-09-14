@@ -10,29 +10,27 @@ const HabitTracker = () => {
 
   // Initialize habit data
   useEffect(() => {
-    const savedData = localStorage.getItem('habitTrackerData');
-    if (savedData) {
-      try {
-        setHabitData(JSON.parse(savedData));
-      } catch (error) {
-        console.error('Error loading habit data:', error);
-        // Initialize with empty data for 100 days and 10 habits
-        const initialData = {};
-        for (let day = 1; day <= 100; day++) {
-          initialData[day] = {
-            habit1: false, habit2: false, habit3: false, habit4: false, habit5: false,
-            habit6: false, habit7: false, habit8: false, habit9: false, habit10: false,
-          };
-        }
-        setHabitData(initialData);
+    const savedData = DataManager.loadHabitData();
+    if (savedData && Object.keys(savedData).length > 0) {
+      setHabitData(savedData);
+    } else {
+      // Initialize with empty data for 100 days and 10 habits
+      const initialData = {};
+      for (let day = 1; day <= 100; day++) {
+        initialData[day] = {
+          habit1: false, habit2: false, habit3: false, habit4: false, habit5: false,
+          habit6: false, habit7: false, habit8: false, habit9: false, habit10: false,
+        };
       }
+      setHabitData(initialData);
+      DataManager.saveHabitData(initialData);
     }
   }, []);
 
   // Save to localStorage whenever data changes
   useEffect(() => {
     if (Object.keys(habitData).length > 0) {
-      localStorage.setItem('habitTrackerData', JSON.stringify(habitData));
+      DataManager.saveHabitData(habitData);
     }
   }, [habitData]);
 
