@@ -263,9 +263,19 @@ const GoalSetting = () => {
       return Math.round((completed / totalPossible) * 100);
     }
 
-    if (goal.category === 'productivity' && goal.title.includes('750')) {
+    if (goal.category === 'productivity' && goal.title.includes('100')) {
       const totalHours = Object.values(focusData).reduce((sum, hours) => sum + (hours || 0), 0);
-      return Math.round((totalHours / 750) * 100);
+      return Math.round((totalHours / 100) * 100);
+    }
+
+    if (goal.category === 'productivity' && goal.title.includes('250')) {
+      const totalHours = Object.values(focusData).reduce((sum, hours) => sum + (hours || 0), 0);
+      return Math.round((totalHours / 250) * 100);
+    }
+
+    if (goal.category === 'productivity' && goal.title.includes('500')) {
+      const totalHours = Object.values(focusData).reduce((sum, hours) => sum + (hours || 0), 0);
+      return Math.round((totalHours / 500) * 100);
     }
 
     if (goal.category === 'personal' && goal.title.includes('50-day')) {
