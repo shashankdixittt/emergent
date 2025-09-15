@@ -86,9 +86,9 @@ const FocusHoursTracker = () => {
   const get100DayGoals = () => {
     const total = getTotalHours();
     return {
-      goal500: { target: 500, progress: Math.min(100, (total / 500) * 100), achieved: total >= 500 },
-      goal750: { target: 750, progress: Math.min(100, (total / 750) * 100), achieved: total >= 750 },
-      goal1000: { target: 1000, progress: Math.min(100, (total / 1000) * 100), achieved: total >= 1000 }
+      goal100: { target: 100, progress: Math.min(100, (total / 100) * 100), achieved: total >= 100 },
+      goal250: { target: 250, progress: Math.min(100, (total / 250) * 100), achieved: total >= 250 },
+      goal500: { target: 500, progress: Math.min(100, (total / 500) * 100), achieved: total >= 500 }
     };
   };
 
