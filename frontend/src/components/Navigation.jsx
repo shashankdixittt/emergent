@@ -1,10 +1,9 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Target, Clock, BarChart3, Home, Flag, Timer } from 'lucide-react';
+import { Target, Clock, Home, Flag, Timer } from 'lucide-react';
 import Dashboard from './Dashboard';
 import HabitTracker from './HabitTracker';
 import FocusHoursTracker from './FocusHoursTracker';
-import Analytics from './Analytics';
 import GoalSetting from './GoalSetting';
 import TimeTracker from './TimeTracker';
 
