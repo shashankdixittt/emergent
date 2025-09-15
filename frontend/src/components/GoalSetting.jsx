@@ -145,11 +145,11 @@ const GoalSetting = () => {
         },
         {
           id: Date.now() + 2,
-          title: 'Achieve 750 total focus hours',
-          description: 'Increase productivity through focused work sessions over 100 days',
+          title: 'Achieve 100 total focus hours',
+          description: 'Build consistent focus habits with your first milestone',
           category: 'productivity',
-          target: '750 hours',
-          deadline: '2025-05-08',
+          target: '100 hours',
+          deadline: '2025-02-25', // ~30 days from now
           priority: 'medium',
           progress: 0,
           completed: false,
@@ -157,6 +157,30 @@ const GoalSetting = () => {
         },
         {
           id: Date.now() + 3,
+          title: 'Achieve 250 total focus hours',
+          description: 'Reach mid-level focus mastery milestone',
+          category: 'productivity',
+          target: '250 hours',
+          deadline: '2025-03-25', // ~60 days from now
+          priority: 'medium',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 4,
+          title: 'Achieve 500 total focus hours',
+          description: 'Master-level focus achievement over 100 days',
+          category: 'productivity',
+          target: '500 hours',
+          deadline: '2025-05-08', // ~100 days from now
+          priority: 'high',
+          progress: 0,
+          completed: false,
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: Date.now() + 5,
           title: 'Reach 50-day milestone',
           description: 'Complete half of the 100-day challenge successfully',
           category: 'personal',
@@ -168,7 +192,7 @@ const GoalSetting = () => {
           createdAt: new Date().toISOString()
         },
         {
-          id: Date.now() + 4,
+          id: Date.now() + 6,
           title: 'Maintain 14-day streak',
           description: 'Build momentum with a 2-week consistent habit streak',
           category: 'habits',
