@@ -13,7 +13,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto">
         <Tabs defaultValue="dashboard" className="w-full">
           <div className="flex justify-center mb-8">
-            <TabsList className="grid w-[720px] grid-cols-6 bg-white shadow-sm border">
+            <TabsList className="grid w-[600px] grid-cols-5 bg-white shadow-sm border">
               <TabsTrigger 
                 value="dashboard" 
                 className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
