@@ -43,13 +43,6 @@ const Navigation = () => {
                 Time Tracker
               </TabsTrigger>
               <TabsTrigger 
-                value="analytics" 
-                className="flex items-center gap-2 data-[state=active]:bg-orange-600 data-[state=active]:text-white"
-              >
-                <BarChart3 className="h-4 w-4" />
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger 
                 value="goals" 
                 className="flex items-center gap-2 data-[state=active]:bg-pink-600 data-[state=active]:text-white"
               >
