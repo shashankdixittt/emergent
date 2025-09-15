@@ -170,7 +170,7 @@ const FocusHoursTracker = () => {
             {Object.entries(goals).map(([key, goal]) => (
               <div key={key} className={`p-4 rounded-lg border-2 ${goal.achieved ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
                 <div className="flex justify-between items-center mb-2">
-                  <h4 className="font-semibold">{goal.target}h Challenge</h4>
+                  <h4 className="font-semibold">{goal.target}hrs Challenge</h4>
                   {goal.achieved && <span className="text-green-600">🎯</span>}
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
