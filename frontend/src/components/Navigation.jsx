@@ -68,10 +68,6 @@ const Navigation = () => {
             <TimeTracker />
           </TabsContent>
 
-          <TabsContent value="analytics" className="space-y-4">
-            <Analytics />
-          </TabsContent>
-
           <TabsContent value="goals" className="space-y-4">
             <GoalSetting />
           </TabsContent>
