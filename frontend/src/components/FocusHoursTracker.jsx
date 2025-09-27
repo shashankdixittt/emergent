@@ -54,7 +54,7 @@ const FocusHoursTracker = () => {
 
   const getAverageHours = () => {
     const total = getTotalHours();
-    return Math.round((total / 100) * 10) / 10;
+    return Math.round((total / 90) * 10) / 10;
   };
 
   const getStreakInfo = () => {
