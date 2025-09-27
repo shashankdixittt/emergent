@@ -127,26 +127,39 @@ const TimeTracker = () => {
       alert('Please enter an activity description');
       return;
     }
+    const now = new Date();
     setIsRunning(true);
+    setStartTime(now);
     setCurrentTime(0);
   };
 
   const pauseTimer = () => {
     setIsRunning(false);
+    // Keep the elapsed time for resume functionality
+  };
+
+  const resumeTimer = () => {
+    if (!isRunning && currentTime > 0) {
+      // Resume from where we paused
+      const now = new Date();
+      const adjustedStartTime = new Date(now.getTime() - currentTime * 1000);
+      setStartTime(adjustedStartTime);
+      setIsRunning(true);
+    }
   };
 
   const stopTimer = () => {
     if (currentTime === 0) return;
     
     const now = new Date();
-    const startTime = new Date(now.getTime() - currentTime * 1000);
+    const actualStartTime = startTime || new Date(now.getTime() - currentTime * 1000);
     
     const newEntry = {
       id: Date.now(),
       activity: currentActivity,
       project: currentProject,
       duration: currentTime,
-      startTime: startTime,
+      startTime: actualStartTime,
       endTime: now,
       date: now.toDateString()
     };
@@ -154,7 +167,9 @@ const TimeTracker = () => {
     setTimeEntries(prev => [newEntry, ...prev]);
     setIsRunning(false);
     setCurrentTime(0);
+    setStartTime(null);
     setCurrentActivity('');
+    localStorage.removeItem('timerState');
   };
 
   const clearAllData = () => {
