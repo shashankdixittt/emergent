@@ -444,19 +444,15 @@ const FocusHoursTracker = () => {
                   </div>
                   <div className="text-center">
                     <div className="font-medium">Month 1</div>
-                    <div className="text-xs opacity-70">Days 25-30</div>
+                    <div className="text-xs opacity-70">Day 30</div>
                   </div>
                   <div className="text-center">
-                    <div className="font-medium">Halfway</div>
-                    <div className="text-xs opacity-70">Day 50</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-medium">Final Sprint</div>
-                    <div className="text-xs opacity-70">Days 75-100</div>
+                    <div className="font-medium">Month 2</div>
+                    <div className="text-xs opacity-70">Day 60</div>
                   </div>
                   <div className="text-center">
                     <div className="font-medium">Finish Line</div>
-                    <div className="text-xs opacity-70">Day 100</div>
+                    <div className="text-xs opacity-70">Day 90</div>
                   </div>
                 </div>
               </div>
