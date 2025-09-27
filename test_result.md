@@ -215,20 +215,25 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "3.0"
-  test_sequence: 3
+  version: "4.0"
+  test_sequence: 4
   run_ui: true
 
 test_plan:
   current_focus:
-    - "Time Entry Deletion Functionality"
-  stuck_tasks:
-    - "Time Entry Deletion Functionality"
+    - "90-Day Dashboard Verification"
+    - "90-Day Protocols Page Verification"
+    - "90-Day Focus Hours Page Verification"
+    - "Days 1-5 Interactive Functionality - Protocols"
+    - "Days 1-5 Interactive Functionality - Focus Hours"
+    - "90-Day Goals and Milestones Updates"
+    - "90-Day Progress Calculations"
+    - "90-Day Chart and Visualization Updates"
+    - "Data Persistence for 90-Day Challenge"
+  stuck_tasks: []
   test_all: true
   test_priority: "high_first"
 
 agent_communication:
     - agent: "main"
-      message: "Time Tracker functionality has been implemented and needs comprehensive testing. All core features are in place: timer controls, persistence, time entry management, UI state management, and statistics. Ready for testing agent to verify all functionality works as expected."
-    - agent: "testing"
-      message: "✅ COMPREHENSIVE TIME TRACKER TESTING COMPLETED! 8 out of 9 features working perfectly: ✅ Timer controls (start/pause/resume/stop), ✅ Timer counting accuracy (tested at 5s, 10s, 15s intervals), ✅ 30-minute persistence test passed, ✅ Time entry creation with correct duration/times, ✅ UI state management, ✅ Project selection and activity input, ✅ Calendar navigation, ✅ Statistics and data storage. ❌ CRITICAL ISSUE: Time entry deletion not working - delete buttons present but entries not removed from display or localStorage. This is the only failing functionality that needs to be fixed."
+      message: "90-day challenge implementation has been updated and needs comprehensive testing. All components updated to reflect 90-day timeline instead of 100-day. N/A restrictions removed from Days 1-5. Goals and milestones updated to 90-day targets. Ready for testing agent to verify all 90-day functionality works correctly."
