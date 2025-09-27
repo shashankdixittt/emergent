@@ -409,8 +409,8 @@ const FocusHoursTracker = () => {
                   })}
                   
                   {/* Milestone Markers */}
-                  {[25, 50, 75].map(milestone => {
-                    const x = 50 + ((milestone - 1) / 99) * 900;
+                  {[30, 60, 90].map(milestone => {
+                    const x = 50 + ((milestone - 1) / 89) * 900;
                     return (
                       <g key={`milestone-${milestone}`}>
                         <line x1={x} y1="15" x2={x} y2="185" stroke="#8b5cf6" strokeWidth="2" />
