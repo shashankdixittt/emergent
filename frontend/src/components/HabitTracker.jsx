@@ -174,21 +174,17 @@ const HabitTracker = () => {
                       </td>
                     ))}
                     <td className="p-3 text-center">
-                      {day <= 5 ? (
-                        <span className="text-xs text-muted-foreground font-medium">N/A</span>
-                      ) : (
-                        <div className="flex items-center justify-center gap-2">
-                          <div className="w-12 bg-muted rounded-full h-2 overflow-hidden">
-                            <div 
-                              className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-300"
-                              style={{ width: `${getDayCompletion(day)}%` }}
-                            />
-                          </div>
-                          <span className="text-sm font-medium text-muted-foreground">
-                            {getDayCompletion(day)}%
-                          </span>
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-12 bg-muted rounded-full h-2 overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-300"
+                            style={{ width: `${getDayCompletion(day)}%` }}
+                          />
                         </div>
-                      )}
+                        <span className="text-sm font-medium text-muted-foreground">
+                          {getDayCompletion(day)}%
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 ))}
