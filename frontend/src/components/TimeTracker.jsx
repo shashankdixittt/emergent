@@ -31,7 +31,7 @@ const TimeTracker = () => {
 
   const projects = ['Work', 'Personal', 'Learning', 'Exercise', 'Focus Time', 'Reading', 'Meditation'];
 
-  // Initialize time entries
+  // Initialize time entries and restore timer state
   useEffect(() => {
     const savedEntries = localStorage.getItem('timeEntries');
     if (savedEntries) {
@@ -45,6 +45,23 @@ const TimeTracker = () => {
       } catch (error) {
         console.error('Error loading time entries:', error);
         setTimeEntries([]);
+      }
+    }
+    
+    // Restore timer state from localStorage
+    const savedTimerState = localStorage.getItem('timerState');
+    if (savedTimerState) {
+      try {
+        const timerState = JSON.parse(savedTimerState);
+        if (timerState.isRunning && timerState.startTime) {
+          setIsRunning(true);
+          setStartTime(new Date(timerState.startTime));
+          setCurrentActivity(timerState.activity || '');
+          setCurrentProject(timerState.project || 'Work');
+        }
+      } catch (error) {
+        console.error('Error restoring timer state:', error);
+        localStorage.removeItem('timerState');
       }
     }
     
