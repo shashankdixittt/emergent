@@ -224,9 +224,9 @@ const Dashboard = () => {
       icon: <Clock className="h-5 w-5" />
     },
     {
-      title: "100-Day Legend",
-      description: "Complete the challenge",
-      completed: challengeProgress.daysTracked >= 100,
+      title: "90-Day Legend",
+      description: "Complete the 90-day challenge", 
+      completed: challengeProgress.daysTracked >= 90,
       icon: <Trophy className="h-5 w-5" />
     }
   ];
