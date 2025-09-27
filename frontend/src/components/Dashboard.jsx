@@ -255,8 +255,8 @@ const Dashboard = () => {
               <h3 className="text-xl font-bold text-blue-800">90-Day Challenge Progress</h3>
               <p className="text-blue-600">
                 {challengeProgress.daysTracked === 0 
-                  ? "Ready to start your 100-day journey!" 
-                  : `Day ${challengeProgress.daysTracked} of 100`}
+                  ? "Ready to start your 90-day journey!" 
+                  : `Day ${challengeProgress.daysTracked} of 90`}
               </p>
             </div>
             <div className="text-3xl font-bold text-blue-600">
