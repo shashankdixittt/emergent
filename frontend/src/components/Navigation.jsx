@@ -59,14 +59,6 @@ const Navigation = () => {
           <TabsContent value="timetracker" className="space-y-4">
             <TimeTracker />
           </TabsContent>
-
-          <TabsContent value="analytics" className="space-y-4">
-            <Analytics />
-          </TabsContent>
-
-          <TabsContent value="goals" className="space-y-4">
-            <GoalSetting />
-          </TabsContent>
         </Tabs>
       </div>
     </div>
