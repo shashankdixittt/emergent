@@ -190,7 +190,7 @@ const Dashboard = () => {
   const topHabit = getTopPerformingHabit();
   const todayProgress = getTodaysProgress();
   const currentStreak = getCurrentStreak();
-  const challengeProgress = get100DayProgress();
+  const challengeProgress = get90DayProgress();
 
   const achievements = [
     {
