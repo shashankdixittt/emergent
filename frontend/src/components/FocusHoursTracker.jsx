@@ -372,7 +372,7 @@ const FocusHoursTracker = () => {
                   })()}
                   
                   {/* Enhanced Data Points */}
-                  {days.map(day => {
+                  {days.filter(day => day > 5).map(day => {
                     const hours = focusData[day] || 0;
                     const x = 50 + ((day - 1) / 99) * 900;
                     const y = 160 - (hours / 10) * 120;
@@ -413,6 +413,25 @@ const FocusHoursTracker = () => {
                             className="animate-pulse"
                           />
                         )}
+                      </g>
+                    );
+                  })}
+                  
+                  {/* N/A Markers for first 5 days */}
+                  {[1, 2, 3, 4, 5].map(day => {
+                    const x = 50 + ((day - 1) / 99) * 900;
+                    return (
+                      <g key={`na-${day}`}>
+                        <text 
+                          x={x} 
+                          y="175" 
+                          textAnchor="middle" 
+                          fill="#9ca3af" 
+                          fontSize="8" 
+                          fontWeight="medium"
+                        >
+                          N/A
+                        </text>
                       </g>
                     );
                   })}
