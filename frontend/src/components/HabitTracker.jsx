@@ -106,7 +106,7 @@ const HabitTracker = () => {
               <div className="flex flex-col text-center">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-1 truncate">{habitNames[index]}</p>
-                  <p className="text-sm font-bold">{getCompletionCount(habit)}/100</p>
+                  <p className="text-sm font-bold">{getCompletionCount(habit)}/90</p>
                 </div>
                 <Badge variant={getCompletionPercentage(habit) >= 70 ? "default" : "secondary"} className="mt-1 w-fit mx-auto text-xs">
                   {getCompletionPercentage(habit)}%
