@@ -267,7 +267,7 @@ const Dashboard = () => {
           <p className="text-sm text-blue-700 mt-2">
             {challengeProgress.daysTracked === 0 
               ? "Click on Protocols tab to start tracking your first day!"
-              : `${100 - challengeProgress.daysTracked} days remaining`}
+              : `${90 - challengeProgress.daysTracked} days remaining`}
           </p>
         </CardContent>
       </Card>
