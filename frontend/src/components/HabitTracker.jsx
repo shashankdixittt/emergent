@@ -165,17 +165,11 @@ const HabitTracker = () => {
                     {habits.map((habit, habitIndex) => (
                       <td key={habit} className="p-3 text-center">
                         <div className="flex justify-center">
-                          {day <= 5 ? (
-                            <span className="text-xs text-muted-foreground font-medium bg-gray-100 px-2 py-1 rounded">
-                              N/A
-                            </span>
-                          ) : (
-                            <Checkbox
-                              checked={habitData[day]?.[habit] || false}
-                              onCheckedChange={(checked) => handleHabitChange(day, habit, checked)}
-                              className="h-5 w-5 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600 hover:border-green-400 transition-colors"
-                            />
-                          )}
+                          <Checkbox
+                            checked={habitData[day]?.[habit] || false}
+                            onCheckedChange={(checked) => handleHabitChange(day, habit, checked)}
+                            className="h-5 w-5 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600 hover:border-green-400 transition-colors"
+                          />
                         </div>
                       </td>
                     ))}
