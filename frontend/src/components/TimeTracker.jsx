@@ -286,14 +286,26 @@ const TimeTracker = () => {
             {/* Timer Controls */}
             <div className="flex gap-4">
               {!isRunning ? (
-                <Button 
-                  onClick={startTimer}
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white px-8"
-                >
-                  <Play className="h-5 w-5 mr-2" />
-                  Start
-                </Button>
+                <>
+                  <Button 
+                    onClick={currentTime > 0 ? resumeTimer : startTimer}
+                    size="lg"
+                    className="bg-green-600 hover:bg-green-700 text-white px-8"
+                  >
+                    <Play className="h-5 w-5 mr-2" />
+                    {currentTime > 0 ? 'Resume' : 'Start'}
+                  </Button>
+                  {currentTime > 0 && (
+                    <Button 
+                      onClick={stopTimer}
+                      size="lg"
+                      className="bg-red-600 hover:bg-red-700 text-white px-8"
+                    >
+                      <Square className="h-5 w-5 mr-2" />
+                      Stop
+                    </Button>
+                  )}
+                </>
               ) : (
                 <>
                   <Button 
