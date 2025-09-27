@@ -243,103 +243,257 @@ const FocusHoursTracker = () => {
             </table>
           </div>
           
-          {/* Trend Line Graph */}
-          <div className="p-6 border-t">
-            <h4 className="font-medium mb-4 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              100-Day Progress Trend
+          {/* Enhanced Trend Visualization */}
+          <div className="p-6 border-t bg-gradient-to-br from-slate-50 to-blue-50">
+            <h4 className="font-semibold text-lg mb-6 flex items-center gap-2 text-slate-700">
+              <TrendingUp className="h-5 w-5 text-blue-600" />
+              100-Day Focus Journey Visualization
             </h4>
-            <div className="relative">
-              <svg 
-                className="w-full h-40 border rounded-lg bg-muted/20" 
-                viewBox="0 0 3000 150"
-              >
-                <defs>
-                  <linearGradient id="trendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#06b6d4" />
-                  </linearGradient>
-                </defs>
-                
-                {/* Grid lines */}
-                {[25, 50, 75, 100, 125].map(y => (
-                  <line key={y} x1="0" y1={y} x2="3000" y2={y} stroke="#e5e7eb" strokeWidth="1" />
-                ))}
-                
-                {/* Week markers */}
-                {Array.from({ length: 14 }, (_, i) => (i + 1) * 7).map(weekDay => (
-                  <line key={weekDay} x1={weekDay * 30} y1="0" x2={weekDay * 30} y2="150" stroke="#d1d5db" strokeWidth="1" strokeDasharray="2,2" />
-                ))}
-                
-                {/* Trend line and dots */}
-                {days.slice(0, -1).map(day => {
-                  const currentHours = focusData[day] || 0;
-                  const nextHours = focusData[day + 1] || 0;
-                  
-                  const currentX = (day - 1) * 30 + 15;
-                  const nextX = day * 30 + 15;
-                  
-                  // Y position (inverted - 0 is at bottom, 150 at top)
-                  const currentY = 125 - (currentHours / 10) * 100;
-                  const nextY = 125 - (nextHours / 10) * 100;
-                  
-                  const strokeColor = currentHours > nextHours ? '#ef4444' : 
-                                   currentHours < nextHours ? '#10b981' : '#6b7280';
-                  
-                  return (
-                    <g key={`trend-${day}`}>
-                      {/* Connection line */}
-                      <line
-                        x1={currentX}
-                        y1={currentY}
-                        x2={nextX}
-                        y2={nextY}
-                        stroke={strokeColor}
-                        strokeWidth="2"
-                        strokeOpacity="0.8"
-                      />
-                      {/* Data point */}
-                      <circle
-                        cx={currentX}
-                        cy={currentY}
-                        r="2"
-                        fill="url(#trendGradient)"
-                        stroke="white"
-                        strokeWidth="1"
-                      />
-                      {/* Last point */}
-                      {day === 99 && (
-                        <circle
-                          cx={nextX}
-                          cy={nextY}
-                          r="2"
-                          fill="url(#trendGradient)"
-                          stroke="white"
-                          strokeWidth="1"
-                        />
-                      )}
-                    </g>
-                  );
-                })}
-              </svg>
-              
-              {/* X-axis labels */}
-              <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                <span>Day 1</span>
-                <span>Day 25</span>
-                <span>Day 50</span>
-                <span>Day 75</span>
-                <span>Day 100</span>
+            
+            {/* Chart Container */}
+            <div className="relative bg-white p-6 rounded-xl shadow-sm border border-blue-100">
+              {/* Chart Header */}
+              <div className="flex justify-between items-center mb-4">
+                <div className="text-sm text-slate-600">
+                  <span className="font-medium">Progress Overview</span> • Visual representation of your focus hours across 100 days
+                </div>
+                <div className="flex items-center gap-4 text-xs">
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"></div>
+                    High Focus (6-10h)
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"></div>
+                    Medium Focus (2-5h)
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                    No Focus (0h)
+                  </span>
+                </div>
               </div>
               
-              {/* Y-axis labels */}
-              <div className="absolute left-0 top-0 h-40 flex flex-col justify-between text-xs text-muted-foreground -ml-8">
-                <span>10h</span>
-                <span>8h</span>
-                <span>6h</span>
-                <span>4h</span>
-                <span>2h</span>
-                <span>0h</span>
+              {/* Enhanced SVG Chart */}
+              <div className="relative">
+                <svg 
+                  className="w-full h-64 rounded-lg bg-gradient-to-br from-slate-50 via-white to-blue-50" 
+                  viewBox="0 0 1000 200"
+                  style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.1))' }}
+                >
+                  <defs>
+                    {/* Enhanced Gradients */}
+                    <linearGradient id="mainTrendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="50%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#06b6d4" />
+                    </linearGradient>
+                    
+                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.1" />
+                    </linearGradient>
+                    
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  
+                  {/* Background Grid */}
+                  {[40, 80, 120, 160].map(y => (
+                    <line key={y} x1="50" y1={y} x2="950" y2={y} stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3,3" />
+                  ))}
+                  
+                  {/* Week Markers */}
+                  {Array.from({ length: 14 }, (_, i) => (i + 1) * 7).map(weekDay => {
+                    const x = 50 + ((weekDay - 1) / 99) * 900;
+                    return (
+                      <line key={weekDay} x1={x} y1="20" x2={x} y2="180" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="2,4" />
+                    );
+                  })}
+                  
+                  {/* Area under curve */}
+                  {(() => {
+                    const pathPoints = days.map(day => {
+                      const hours = focusData[day] || 0;
+                      const x = 50 + ((day - 1) / 99) * 900;
+                      const y = 160 - (hours / 10) * 120;
+                      return `${x},${y}`;
+                    });
+                    
+                    const pathD = `M 50,160 L ${pathPoints.join(' L ')} L 950,160 Z`;
+                    
+                    return (
+                      <path
+                        d={pathD}
+                        fill="url(#areaGradient)"
+                        opacity="0.6"
+                      />
+                    );
+                  })()}
+                  
+                  {/* Main Trend Line */}
+                  {(() => {
+                    const pathPoints = days.map(day => {
+                      const hours = focusData[day] || 0;
+                      const x = 50 + ((day - 1) / 99) * 900;
+                      const y = 160 - (hours / 10) * 120;
+                      return `${x},${y}`;
+                    });
+                    
+                    return (
+                      <path
+                        d={`M ${pathPoints.join(' L ')}`}
+                        stroke="url(#mainTrendGradient)"
+                        strokeWidth="3"
+                        fill="none"
+                        filter="url(#glow)"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    );
+                  })()}
+                  
+                  {/* Enhanced Data Points */}
+                  {days.map(day => {
+                    const hours = focusData[day] || 0;
+                    const x = 50 + ((day - 1) / 99) * 900;
+                    const y = 160 - (hours / 10) * 120;
+                    
+                    if (hours === 0) return null;
+                    
+                    const pointColor = hours >= 6 ? '#10b981' : hours >= 2 ? '#f59e0b' : '#6b7280';
+                    const pointSize = hours >= 8 ? 4 : hours >= 4 ? 3 : 2;
+                    
+                    return (
+                      <g key={`point-${day}`}>
+                        <circle
+                          cx={x}
+                          cy={y}
+                          r={pointSize + 1}
+                          fill="white"
+                          stroke={pointColor}
+                          strokeWidth="2"
+                          opacity="0.9"
+                        />
+                        <circle
+                          cx={x}
+                          cy={y}
+                          r={pointSize}
+                          fill={pointColor}
+                        />
+                        
+                        {/* Highlight peak days */}
+                        {hours >= 8 && (
+                          <circle
+                            cx={x}
+                            cy={y}
+                            r="8"
+                            fill="none"
+                            stroke={pointColor}
+                            strokeWidth="1"
+                            opacity="0.3"
+                            className="animate-pulse"
+                          />
+                        )}
+                      </g>
+                    );
+                  })}
+                  
+                  {/* Milestone Markers */}
+                  {[25, 50, 75].map(milestone => {
+                    const x = 50 + ((milestone - 1) / 99) * 900;
+                    return (
+                      <g key={`milestone-${milestone}`}>
+                        <line x1={x} y1="15" x2={x} y2="185" stroke="#8b5cf6" strokeWidth="2" />
+                        <rect x={x-15} y="10" width="30" height="12" fill="#8b5cf6" rx="6" />
+                        <text x={x} y="19" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">
+                          {milestone}
+                        </text>
+                      </g>
+                    );
+                  })}
+                  
+                  {/* Y-axis labels */}
+                  {[0, 2, 4, 6, 8, 10].map(hours => {
+                    const y = 160 - (hours / 10) * 120;
+                    return (
+                      <g key={`ylabel-${hours}`}>
+                        <text x="40" y={y + 3} textAnchor="end" fill="#64748b" fontSize="10" fontWeight="medium">
+                          {hours}h
+                        </text>
+                        <circle cx="45" cy={y} r="1" fill="#cbd5e1" />
+                      </g>
+                    );
+                  })}
+                </svg>
+                
+                {/* Enhanced X-axis */}
+                <div className="flex justify-between text-xs text-slate-500 mt-4 px-12">
+                  <div className="text-center">
+                    <div className="font-medium">Week 1</div>
+                    <div className="text-xs opacity-70">Days 1-7</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium">Month 1</div>
+                    <div className="text-xs opacity-70">Days 25-30</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium">Halfway</div>
+                    <div className="text-xs opacity-70">Day 50</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium">Final Sprint</div>
+                    <div className="text-xs opacity-70">Days 75-100</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-medium">Finish Line</div>
+                    <div className="text-xs opacity-70">Day 100</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Chart Insights */}
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                {(() => {
+                  const totalHours = getTotalHours();
+                  const averageHours = getAverageHours();
+                  const maxDay = Object.entries(focusData).reduce((max, [day, hours]) => 
+                    hours > (focusData[max] || 0) ? day : max, '1');
+                  const peakHours = focusData[maxDay] || 0;
+                  
+                  return (
+                    <>
+                      <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-700">{totalHours}h</div>
+                        <div className="text-xs text-blue-600">Total Progress</div>
+                        <div className="text-xs text-blue-500 mt-1">
+                          {Math.round((totalHours / 500) * 100)}% to 500h goal
+                        </div>
+                      </div>
+                      
+                      <div className="text-center p-3 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg">
+                        <div className="text-2xl font-bold text-emerald-700">{peakHours}h</div>
+                        <div className="text-xs text-emerald-600">Peak Day</div>
+                        <div className="text-xs text-emerald-500 mt-1">
+                          Day {maxDay} • Best Performance
+                        </div>
+                      </div>
+                      
+                      <div className="text-center p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-700">{averageHours}h</div>
+                        <div className="text-xs text-purple-600">Daily Average</div>
+                        <div className="text-xs text-purple-500 mt-1">
+                          {averageHours >= 5 ? 'Excellent!' : averageHours >= 3 ? 'Good pace' : 'Room to grow'}
+                        </div>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             </div>
           </div>
