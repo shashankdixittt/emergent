@@ -12,7 +12,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto">
         <Tabs defaultValue="dashboard" className="w-full">
           <div className="flex justify-center mb-8">
-            <TabsList className="grid w-[720px] grid-cols-6 bg-white shadow-sm border">
+            <TabsList className="grid w-[480px] grid-cols-4 bg-white shadow-sm border">
               <TabsTrigger 
                 value="dashboard" 
                 className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
@@ -40,20 +40,6 @@ const Navigation = () => {
               >
                 <Timer className="h-4 w-4" />
                 Time Tracker
-              </TabsTrigger>
-              <TabsTrigger 
-                value="analytics" 
-                className="flex items-center gap-2 data-[state=active]:bg-orange-600 data-[state=active]:text-white"
-              >
-                <BarChart3 className="h-4 w-4" />
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger 
-                value="goals" 
-                className="flex items-center gap-2 data-[state=active]:bg-pink-600 data-[state=active]:text-white"
-              >
-                <Flag className="h-4 w-4" />
-                Goals
               </TabsTrigger>
             </TabsList>
           </div>
