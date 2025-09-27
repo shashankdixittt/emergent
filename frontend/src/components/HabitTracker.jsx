@@ -122,10 +122,10 @@ const HabitTracker = () => {
         <CardHeader>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-5 w-5 text-green-600" />
-            <CardTitle>100-Day Protocol Tracker</CardTitle>
+            <CardTitle>90-Day Protocol Tracker</CardTitle>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Complete your daily protocols to build strong habits and reach your 100-day goal
+            Complete your daily protocols to build strong habits and reach your 90-day goal
           </p>
         </CardHeader>
         <CardContent className="p-0">
