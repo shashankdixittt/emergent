@@ -309,8 +309,8 @@ const FocusHoursTracker = () => {
                   ))}
                   
                   {/* Week Markers */}
-                  {Array.from({ length: 14 }, (_, i) => (i + 1) * 7).map(weekDay => {
-                    const x = 50 + ((weekDay - 1) / 99) * 900;
+                  {Array.from({ length: 12 }, (_, i) => (i + 1) * 7).filter(weekDay => weekDay <= 90).map(weekDay => {
+                    const x = 50 + ((weekDay - 1) / 89) * 900;
                     return (
                       <line key={weekDay} x1={x} y1="20" x2={x} y2="180" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="2,4" />
                     );
