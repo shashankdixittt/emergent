@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the updated Personal Development Dashboard with focus on navigation testing (4 tabs only), Focus Hours page testing (enhanced graph visualization, interactive grid, enhanced legend sections, 100-Day Focus Journey Visualization), visual design testing (gradient designs, milestone markers), functionality testing (grid interactions, data persistence), and overall user experience testing."
+user_problem_statement: "Test the N/A implementation for first 5 days on both Protocols and Focus Hours pages: 1) Protocols Page Testing - verify Days 1-5 show N/A instead of checkboxes, confirm progress column shows N/A for Days 1-5, test Days 6+ have functional checkboxes; 2) Focus Hours Page Testing - verify Days 1-5 show N/A instead of interactive dots, confirm Days 6+ have functional dots, verify enhanced chart excludes first 5 days; 3) Visual Design Testing - confirm N/A elements are properly styled, verify smooth transition from N/A to interactive elements; 4) Data Persistence Testing - test data entry on Days 6+ saves correctly, verify statistics calculate correctly excluding N/A days."
 
 frontend:
   - task: "Navigation System - 4 Tabs Only"
