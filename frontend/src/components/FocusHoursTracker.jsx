@@ -498,22 +498,57 @@ const FocusHoursTracker = () => {
             </div>
           </div>
 
-          {/* Legend */}
+          {/* Enhanced Legend & Instructions */}
           <div className="p-6 pt-0">
-            <div className="p-4 bg-muted/30 rounded-lg">
-              <p className="text-sm font-medium mb-3">Focus Hours Legend:</p>
-              <div className="flex flex-wrap gap-4 mb-3">
-                {hourOptions.map(hours => (
-                  <div key={hours} className="flex items-center gap-2">
-                    <div className={`w-4 h-4 rounded-full border border-white ${getColorForHours(hours).split(' ')[0]}`}></div>
-                    <span className="text-sm">{hours}h</span>
-                  </div>
-                ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Interactive Legend */}
+              <div className="p-5 bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border border-slate-200">
+                <h5 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                  <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full"></div>
+                  Focus Hours Grid Legend
+                </h5>
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  {hourOptions.map(hours => (
+                    <div key={hours} className="flex items-center gap-2 p-2 bg-white rounded-lg shadow-sm">
+                      <div className={`w-4 h-4 rounded-full border border-white shadow-sm ${getColorForHours(hours).split(' ')[0]}`}></div>
+                      <span className="text-sm font-medium text-slate-700">{hours}h</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-xs text-slate-600 space-y-1">
+                  <p><strong>💡 Pro Tip:</strong> Click the colored dots in the grid above to set your daily focus hours</p>
+                  <p><strong>🎯 Target:</strong> Aim for consistent 4-6 hour daily sessions</p>
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground">
-                <p><strong>Trend Lines:</strong> 🟢 Green (increasing) • 🔴 Red (decreasing) • ⚫ Gray (stable)</p>
-                <p><strong>Usage:</strong> Click colored dots in the grid to set daily focus hours</p>
-                <p><strong>100-Day Challenge:</strong> Aim for 500-1000 total focus hours!</p>
+              
+              {/* Progress Insights */}
+              <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                <h5 className="font-semibold text-emerald-700 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4" />
+                  100-Day Challenge Insights
+                </h5>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-emerald-600">Challenge Progress:</span>
+                    <span className="font-semibold text-emerald-800">{Math.round((getTotalHours() / 500) * 100)}% to 500h</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-emerald-600">Days Tracked:</span>
+                    <span className="font-semibold text-emerald-800">{Object.keys(focusData).length}/100</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-emerald-600">Productive Days (4h+):</span>
+                    <span className="font-semibold text-emerald-800">
+                      {Object.values(focusData).filter(h => h >= 4).length} days
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-4 p-3 bg-emerald-100 rounded-lg">
+                  <p className="text-xs text-emerald-700">
+                    <strong>🏆 Challenge Milestones:</strong><br/>
+                    100hrs (Beginner) • 250hrs (Intermediate) • 500hrs (Expert)
+                  </p>
+                </div>
               </div>
             </div>
           </div>
