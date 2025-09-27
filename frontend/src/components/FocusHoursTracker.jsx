@@ -223,18 +223,26 @@ const FocusHoursTracker = () => {
                     </td>
                     {days.map(day => (
                       <td key={`${hours}-${day}`} className="p-1 text-center">
-                        <button
-                          onClick={() => handleCellClick(day, hours)}
-                          className={`
-                            w-5 h-5 rounded-full border border-white transition-all duration-200 
-                            hover:scale-125 hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-blue-500
-                            ${focusData[day] === hours 
-                              ? `${getColorForHours(hours)} shadow-md` 
-                              : 'bg-gray-200 hover:bg-gray-300'
-                            }
-                          `}
-                          title={`Set ${hours} hours for Day ${day}`}
-                        />
+                        {day <= 5 ? (
+                          <div className="w-5 h-5 flex items-center justify-center">
+                            <span className="text-xs text-muted-foreground font-medium transform rotate-45">
+                              N/A
+                            </span>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => handleCellClick(day, hours)}
+                            className={`
+                              w-5 h-5 rounded-full border border-white transition-all duration-200 
+                              hover:scale-125 hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-blue-500
+                              ${focusData[day] === hours 
+                                ? `${getColorForHours(hours)} shadow-md` 
+                                : 'bg-gray-200 hover:bg-gray-300'
+                              }
+                            `}
+                            title={`Set ${hours} hours for Day ${day}`}
+                          />
+                        )}
                       </td>
                     ))}
                   </tr>
