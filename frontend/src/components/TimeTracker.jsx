@@ -76,18 +76,35 @@ const TimeTracker = () => {
     }
   }, [timeEntries]);
 
-  // Timer logic
+  // Timer logic - calculate elapsed time based on start time
   useEffect(() => {
     let interval = null;
-    if (isRunning) {
+    if (isRunning && startTime) {
       interval = setInterval(() => {
-        setCurrentTime(prevTime => prevTime + 1);
+        const now = new Date();
+        const elapsed = Math.floor((now - startTime) / 1000);
+        setCurrentTime(elapsed);
       }, 1000);
-    } else {
+    } else if (!isRunning) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, startTime]);
+
+  // Save timer state to localStorage when it changes
+  useEffect(() => {
+    if (isRunning && startTime) {
+      const timerState = {
+        isRunning: true,
+        startTime: startTime.toISOString(),
+        activity: currentActivity,
+        project: currentProject
+      };
+      localStorage.setItem('timerState', JSON.stringify(timerState));
+    } else {
+      localStorage.removeItem('timerState');
+    }
+  }, [isRunning, startTime, currentActivity, currentProject]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
