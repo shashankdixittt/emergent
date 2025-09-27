@@ -247,7 +247,7 @@ const FocusHoursTracker = () => {
           <div className="p-6 border-t bg-gradient-to-br from-slate-50 to-blue-50">
             <h4 className="font-semibold text-lg mb-6 flex items-center gap-2 text-slate-700">
               <TrendingUp className="h-5 w-5 text-blue-600" />
-              100-Day Focus Journey Visualization
+              90-Day Focus Journey Visualization
             </h4>
             
             {/* Chart Container */}
