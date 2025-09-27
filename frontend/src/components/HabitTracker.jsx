@@ -50,7 +50,7 @@ const HabitTracker = () => {
 
   const getCompletionPercentage = (habit) => {
     const count = getCompletionCount(habit);
-    return Math.round((count / 100) * 100);
+    return Math.round((count / 90) * 100);
   };
 
   const getDayCompletion = (day) => {
