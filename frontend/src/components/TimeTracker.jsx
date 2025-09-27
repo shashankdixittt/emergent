@@ -175,9 +175,11 @@ const TimeTracker = () => {
   const clearAllData = () => {
     if (window.confirm('Are you sure you want to clear all time tracking data? This action cannot be undone.')) {
       localStorage.removeItem('timeEntries');
+      localStorage.removeItem('timerState');
       setTimeEntries([]);
       setIsRunning(false);
       setCurrentTime(0);
+      setStartTime(null);
       setCurrentActivity('');
     }
   };
