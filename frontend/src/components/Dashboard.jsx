@@ -179,7 +179,7 @@ const Dashboard = () => {
 
   const get90DayProgress = () => {
     const currentDay = getCurrentDayOfChallenge();
-    const progressPercentage = currentDay > 0 ? Math.round((currentDay / 100) * 100) : 0;
+    const progressPercentage = currentDay > 0 ? Math.round((currentDay / 90) * 100) : 0;
     return { 
       daysTracked: currentDay, 
       progressPercentage: progressPercentage 
