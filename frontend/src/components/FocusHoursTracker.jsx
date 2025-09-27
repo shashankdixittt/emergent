@@ -160,10 +160,10 @@ const FocusHoursTracker = () => {
         </Card>
       </div>
 
-      {/* 100-Day Focus Goals */}
+      {/* 90-Day Focus Goals */}
       <Card>
         <CardHeader>
-          <CardTitle>100-Day Focus Goals</CardTitle>
+          <CardTitle>90-Day Focus Goals</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
