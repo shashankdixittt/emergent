@@ -150,7 +150,7 @@ const HabitTracker = () => {
                 </tr>
               </thead>
               <tbody>
-                {Array.from({ length: 100 }, (_, i) => i + 1).map(day => (
+                {Array.from({ length: 90 }, (_, i) => i + 1).map(day => (
                   <tr key={day} className="border-b hover:bg-muted/30 transition-colors">
                     <td className="sticky left-0 z-10 bg-background p-3 font-medium border-r">
                       <div className="flex flex-col">
