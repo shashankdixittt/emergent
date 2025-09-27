@@ -71,9 +71,7 @@ const TimeTracker = () => {
 
   // Save time entries to localStorage
   useEffect(() => {
-    if (timeEntries.length > 0) {
-      localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
-    }
+    localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
   }, [timeEntries]);
 
   // Timer logic - calculate elapsed time based on start time
