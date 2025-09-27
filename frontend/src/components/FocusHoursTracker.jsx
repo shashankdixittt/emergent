@@ -193,7 +193,7 @@ const FocusHoursTracker = () => {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-purple-600" />
-            <CardTitle>100-Day Focus Hours Grid</CardTitle>
+            <CardTitle>90-Day Focus Hours Grid</CardTitle>
           </div>
           <p className="text-sm text-muted-foreground">
             Click on dots to set focus hours for each day. Graph shows daily trends.
