@@ -525,7 +525,7 @@ const FocusHoursTracker = () => {
               <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
                 <h5 className="font-semibold text-emerald-700 mb-4 flex items-center gap-2">
                   <TrendingUp className="w-4 h-4" />
-                  100-Day Challenge Insights
+                  90-Day Challenge Insights
                 </h5>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center justify-between">
