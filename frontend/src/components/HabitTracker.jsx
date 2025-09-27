@@ -66,11 +66,11 @@ const HabitTracker = () => {
     'No Maggie', 
     'Mindful Eating', 
     'No PMO', 
-    'WakeUp @8pm', 
-    '45min Book Reading', 
+    'Workout', 
+    'Book Reading', 
     'Meditation',
-    'Revise Notes',
-    '3hrs of Tech'
+    '3hr Tech',
+    '20 mins revision'
   ];
 
   const shortHabitNames = [
@@ -79,11 +79,11 @@ const HabitTracker = () => {
     'No Maggie', 
     'Mindful Eating', 
     'No PMO', 
-    'WakeUp @8pm', 
+    'Workout', 
     'Book Reading', 
     'Meditation',
-    'Revise Notes',
-    '3hrs Tech'
+    '3hr Tech',
+    '20 mins revision'
   ];
 
   return (
