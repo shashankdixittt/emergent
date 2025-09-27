@@ -546,7 +546,7 @@ const FocusHoursTracker = () => {
                 <div className="mt-4 p-3 bg-emerald-100 rounded-lg">
                   <p className="text-xs text-emerald-700">
                     <strong>🏆 Challenge Milestones:</strong><br/>
-                    100hrs (Beginner) • 250hrs (Intermediate) • 500hrs (Expert)
+                    90hrs (Beginner) • 180hrs (Intermediate) • 360hrs (Expert)
                   </p>
                 </div>
               </div>
