@@ -194,18 +194,17 @@ const HabitTracker = () => {
         </CardContent>
       </Card>
 
-      {/* 100-Day Milestones */}
+      {/* 90-Day Milestones */}
       <Card>
         <CardHeader>
-          <CardTitle>100-Day Challenge Milestones</CardTitle>
+          <CardTitle>90-Day Challenge Milestones</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { milestone: 25, label: "Quarter Way", color: "bg-yellow-500" },
-              { milestone: 50, label: "Halfway Point", color: "bg-orange-500" },
-              { milestone: 75, label: "Three Quarters", color: "bg-purple-500" },
-              { milestone: 100, label: "Challenge Complete!", color: "bg-green-500" }
+              { milestone: 30, label: "First Month", color: "bg-yellow-500" },
+              { milestone: 60, label: "Two Months", color: "bg-orange-500" },
+              { milestone: 90, label: "Challenge Complete!", color: "bg-green-500" }
             ].map(({ milestone, label, color }) => {
               const daysCompleted = Object.keys(habitData).filter(day => 
                 habitData[day] && Object.values(habitData[day]).some(Boolean)
