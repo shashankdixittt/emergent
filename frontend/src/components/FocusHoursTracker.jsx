@@ -530,11 +530,11 @@ const FocusHoursTracker = () => {
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center justify-between">
                     <span className="text-emerald-600">Challenge Progress:</span>
-                    <span className="font-semibold text-emerald-800">{Math.round((getTotalHours() / 500) * 100)}% to 500h</span>
+                    <span className="font-semibold text-emerald-800">{Math.round((getTotalHours() / 360) * 100)}% to 360h</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-emerald-600">Days Tracked:</span>
-                    <span className="font-semibold text-emerald-800">{Object.keys(focusData).length}/100</span>
+                    <span className="font-semibold text-emerald-800">{Object.keys(focusData).length}/90</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-emerald-600">Productive Days (4h+):</span>
