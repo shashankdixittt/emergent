@@ -326,14 +326,17 @@ const FocusHoursTracker = () => {
                   
                   {/* Area under curve */}
                   {(() => {
-                    const pathPoints = days.map(day => {
+                    const pathPoints = days.filter(day => day > 5).map(day => {
                       const hours = focusData[day] || 0;
                       const x = 50 + ((day - 1) / 99) * 900;
                       const y = 160 - (hours / 10) * 120;
                       return `${x},${y}`;
                     });
                     
-                    const pathD = `M 50,160 L ${pathPoints.join(' L ')} L 950,160 Z`;
+                    if (pathPoints.length === 0) return null;
+                    
+                    const firstX = 50 + ((6 - 1) / 99) * 900; // Start from day 6
+                    const pathD = `M ${firstX},160 L ${pathPoints.join(' L ')} L 950,160 Z`;
                     
                     return (
                       <path
