@@ -472,7 +472,7 @@ const FocusHoursTracker = () => {
                         <div className="text-2xl font-bold text-blue-700">{totalHours}h</div>
                         <div className="text-xs text-blue-600">Total Progress</div>
                         <div className="text-xs text-blue-500 mt-1">
-                          {Math.round((totalHours / 500) * 100)}% to 500h goal
+                          {Math.round((totalHours / 360) * 100)}% to 360h goal
                         </div>
                       </div>
                       
