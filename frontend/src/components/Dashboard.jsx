@@ -252,7 +252,7 @@ const Dashboard = () => {
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-xl font-bold text-blue-800">100-Day Challenge Progress</h3>
+              <h3 className="text-xl font-bold text-blue-800">90-Day Challenge Progress</h3>
               <p className="text-blue-600">
                 {challengeProgress.daysTracked === 0 
                   ? "Ready to start your 100-day journey!" 
