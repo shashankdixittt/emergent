@@ -72,7 +72,7 @@ const FocusHoursTracker = () => {
     });
 
     // Calculate current streak from the end
-    for (let i = 100; i >= 1; i--) {
+    for (let i = 90; i >= 1; i--) {
       if (focusData[i] >= 4) {
         currentStreak++;
       } else {
