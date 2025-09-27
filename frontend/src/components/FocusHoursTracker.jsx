@@ -255,7 +255,7 @@ const FocusHoursTracker = () => {
               {/* Chart Header */}
               <div className="flex justify-between items-center mb-4">
                 <div className="text-sm text-slate-600">
-                  <span className="font-medium">Progress Overview</span> • Visual representation of your focus hours across 100 days
+                  <span className="font-medium">Progress Overview</span> • Visual representation of your focus hours across 90 days
                 </div>
                 <div className="flex items-center gap-4 text-xs">
                   <span className="flex items-center gap-1">
