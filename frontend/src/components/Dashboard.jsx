@@ -173,7 +173,7 @@ const Dashboard = () => {
     return {
       name: habitNames[habitIndex],
       count: habitCounts[topHabit],
-      percentage: Math.round((habitCounts[topHabit] / 100) * 100)
+      percentage: Math.round((habitCounts[topHabit] / 90) * 100)
     };
   };
 
