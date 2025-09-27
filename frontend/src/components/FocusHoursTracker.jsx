@@ -7,7 +7,7 @@ const FocusHoursTracker = () => {
   const [focusData, setFocusData] = useState({});
 
   const hourOptions = [0, 2, 4, 6, 8, 10];
-  const days = Array.from({ length: 100 }, (_, i) => i + 1);
+  const days = Array.from({ length: 90 }, (_, i) => i + 1);
 
   // Initialize focus data
   useEffect(() => {
