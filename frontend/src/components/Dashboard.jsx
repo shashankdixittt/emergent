@@ -39,7 +39,7 @@ const Dashboard = () => {
   }, []);
 
   const resetAllData = () => {
-    if (window.confirm('Are you sure you want to reset ALL data and start the 100-day challenge from Day 1? This will clear all habits, focus hours, time entries, and goals.')) {
+    if (window.confirm('Are you sure you want to reset ALL data and start the 90-day challenge from Day 1? This will clear all habits, focus hours, time entries, and goals.')) {
       // Clear all stored data
       localStorage.removeItem('habitTrackerData');
       localStorage.removeItem('focusHoursData'); 
