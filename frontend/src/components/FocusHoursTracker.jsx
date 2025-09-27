@@ -101,10 +101,10 @@ const FocusHoursTracker = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="h-8 w-8 text-purple-600" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Focus Hours Tracker - 100 Days
+            Focus Hours Tracker - 90 Days
           </h1>
         </div>
-        <p className="text-muted-foreground">Visual tracking of your daily focused work sessions over 100 days</p>
+        <p className="text-muted-foreground">Visual tracking of your daily focused work sessions over 90 days</p>
       </div>
 
       {/* Stats Overview */}
