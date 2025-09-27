@@ -19,6 +19,7 @@ import {
 const TimeTracker = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [startTime, setStartTime] = useState(null);
   const [currentActivity, setCurrentActivity] = useState('');
   const [currentProject, setCurrentProject] = useState('Work');
   const [timeEntries, setTimeEntries] = useState([]);
