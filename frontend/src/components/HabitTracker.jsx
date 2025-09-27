@@ -14,9 +14,9 @@ const HabitTracker = () => {
     if (savedData && Object.keys(savedData).length > 0) {
       setHabitData(savedData);
     } else {
-      // Initialize with empty data for 100 days and 10 habits
+      // Initialize with empty data for 90 days and 10 habits
       const initialData = {};
-      for (let day = 1; day <= 100; day++) {
+      for (let day = 1; day <= 90; day++) {
         initialData[day] = {
           habit1: false, habit2: false, habit3: false, habit4: false, habit5: false,
           habit6: false, habit7: false, habit8: false, habit9: false, habit10: false,
