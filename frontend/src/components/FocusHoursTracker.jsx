@@ -349,12 +349,14 @@ const FocusHoursTracker = () => {
                   
                   {/* Main Trend Line */}
                   {(() => {
-                    const pathPoints = days.map(day => {
+                    const pathPoints = days.filter(day => day > 5).map(day => {
                       const hours = focusData[day] || 0;
                       const x = 50 + ((day - 1) / 99) * 900;
                       const y = 160 - (hours / 10) * 120;
                       return `${x},${y}`;
                     });
+                    
+                    if (pathPoints.length === 0) return null;
                     
                     return (
                       <path
