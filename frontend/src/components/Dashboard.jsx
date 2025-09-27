@@ -247,7 +247,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 100-Day Challenge Progress */}
+      {/* 90-Day Challenge Progress */}
       <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
