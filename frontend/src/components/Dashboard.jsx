@@ -219,8 +219,8 @@ const Dashboard = () => {
     },
     {
       title: "Focus Master",
-      description: "500+ focus hours",
-      completed: getTotalFocusHours() >= 500,
+      description: "100 focus hours",
+      completed: getTotalFocusHours() >= 100,
       icon: <Clock className="h-5 w-5" />
     },
     {
